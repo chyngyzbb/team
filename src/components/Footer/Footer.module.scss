@@ -1,0 +1,50 @@
+
+.root{
+    background: #fadd72;
+
+}
+.container{
+    width: 90%;
+    // max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    // background: #fadd72;
+}
+
+.footer{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 40px 0 40px 0;
+}
+
+.left{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    .nav{
+        color: black;
+        font-size: 12px;
+    }
+}
+.right{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    .img{
+        font-size: 12px;
+        
+    }
+    .span{
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            .imgPhone{
+                height: 18px;
+            }
+        }
+}

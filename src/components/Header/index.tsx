@@ -15,15 +15,21 @@ import AdbIcon from "@mui/icons-material/Adb";
 import styles from "./Header.module.scss";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
-import top100Films from "./top100Films";
+import { useNavigate } from "react-router-dom";
 // import Button from '@mui/material/Button';
 
-const pages = ["Избранные", "Заказы", "Карзина"];
-const settings = ["Профил", "Продукты", "Dashboard", "Logout"];
+const pages = ["Главная","Избранные", "Заказы", "Карзина","Категория"];
+const settings = [
+  "Профил",
+  "Мои продукты",
+  "Добавит продукт",
+  "Выйти аккаунта",
+];
 
 function Header() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const navigate = useNavigate();
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -43,17 +49,17 @@ function Header() {
   const top10 = ["Apple", "Car", "Home"];
   return (
     <AppBar
+    className={styles.appbar}
       position="static"
       style={{
-        background: "#F9F4E2",
-        color: "black",
+       background:'#fadd72'
         // height:'80px'
       }}
     >
       <Container maxWidth="xl">
         <Toolbar className={styles.toolbar} disableGutters>
           <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
-          <Typography
+          {/* <Typography
             variant="h6"
             noWrap
             component="a"
@@ -69,7 +75,7 @@ function Header() {
             }}
           >
             LOGO
-          </Typography>
+          </Typography> */}
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
@@ -102,11 +108,7 @@ function Header() {
               sx={{ display: { xs: "block", md: "none" } }}
             >
               {pages.map((page) => (
-                <MenuItem
-                  style={{ color: "black" }}
-                  key={page}
-                  onClick={handleCloseNavMenu}
-                >
+                <MenuItem style={{ color: "black" }} key={page}>
                   <Typography
                     style={{ color: "black" }}
                     sx={{ textAlign: "center" }}
@@ -138,11 +140,17 @@ function Header() {
             LOGO
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
+            {pages.map((page, idx) => (
               <Button
                 style={{ color: "black" }}
                 key={page}
-                onClick={handleCloseNavMenu}
+                onClick={() =>
+                  navigate(
+                    `${
+                      idx === 0 ? "/":idx === 1 ? "/favorite" : idx === 2 ? "/order" :idx===3? "/basket":idx===4?'/category':''
+                    }`
+                  )
+                }
                 sx={{ my: 2, color: "white", display: "block" }}
               >
                 {page}
@@ -180,8 +188,23 @@ function Header() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+              {settings.map((setting, idx) => (
+                <MenuItem
+                  key={setting}
+                  onClick={() =>
+                    navigate(
+                      `${
+                        idx === 0
+                          ? "/profile"
+                          : idx === 1
+                          ? "/my-product"
+                          : idx === 2
+                          ? "/add-product"
+                          : "/exit"
+                      }`
+                    )
+                  }
+                >
                   <Typography sx={{ textAlign: "center" }}>
                     {setting}
                   </Typography>
