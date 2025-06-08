@@ -113,9 +113,10 @@ export default function Category() {
         {itemData.map((item) => (
           <ImageListItem
             key={item.img}
-            style={{ width: "240px", height: "140px" }}
+            style={{ width: "240px", height: "140px",borderRadius:'10px' }}
           >
             <img
+            
               srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 3x`}
               src={`${item.img}?w=248&fit=crop&auto=format`}
               alt={item.title}
