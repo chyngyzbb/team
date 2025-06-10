@@ -7,8 +7,10 @@ import IconButton from "@mui/material/IconButton";
 import InfoIcon from "@mui/icons-material/Info";
 import { styled } from "@mui/material";
 import styles from "./Category.module.scss";
+import { useNavigate } from "react-router-dom";
 
 export default function Category() {
+  // const navigate =useNavigate()
   const itemData = [
     {
       img: "https://kuzov-media.ru/upload/iblock/b64/vtcp45wgg1zjuuriy0b42b8jkhmrb43m.jpg",
@@ -116,7 +118,7 @@ export default function Category() {
             style={{ width: "240px", height: "140px",borderRadius:'10px' }}
           >
             <img
-            
+            // onClick={()=>navigate('/basket')}
               srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 3x`}
               src={`${item.img}?w=248&fit=crop&auto=format`}
               alt={item.title}

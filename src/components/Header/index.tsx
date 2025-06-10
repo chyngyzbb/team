@@ -16,6 +16,8 @@ import styles from "./Header.module.scss";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../store/slice/authSlice";
 // import Button from '@mui/material/Button';
 
 const pages = ["Главная","Избранные", "Заказы", "Карзина","Категория"];
@@ -30,6 +32,7 @@ function Header() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const navigate = useNavigate();
+  const dispatch=useDispatch()
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -47,6 +50,12 @@ function Header() {
   };
 
   const top10 = ["Apple", "Car", "Home"];
+
+function exit(){
+  dispatch(setUser(null))
+  return "/exit"
+}
+
   return (
     <AppBar
     className={styles.appbar}
@@ -200,7 +209,8 @@ function Header() {
                           ? "/my-product"
                           : idx === 2
                           ? "/add-product"
-                          : "/exit"
+                          : exit()
+                          
                       }`
                     )
                   }

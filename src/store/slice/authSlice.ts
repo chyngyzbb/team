@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type {  PayloadAction } from "@reduxjs/toolkit";
+import { getLocalStorage, saveToLocalStorage } from "../../localStorage";
 
 
 
@@ -10,7 +11,7 @@ interface AuthState{
 }
 
 const initialState:AuthState={
-    user:null,
+    user:getLocalStorage('user'),
     loading:false,
     error:null
 }
@@ -21,6 +22,7 @@ const authSlice=createSlice({
     reducers:{
         setUser(state,action: PayloadAction<string|null>){
             state.user=action.payload
+            saveToLocalStorage('user',action.payload)
         },
         setError(state,action:PayloadAction<string|null>){
             state.error=action.payload
@@ -28,7 +30,8 @@ const authSlice=createSlice({
         setLoading(state,action:PayloadAction<boolean>){
             state.loading=action.payload
         }
-    }
+    },
+   
 })
 
 export const{setUser,setError,setLoading}=authSlice.actions
