@@ -12,18 +12,18 @@ import MyProduct from "./page/MyProduct";
 import Exit from "./page/Exit";
 import Category from "./page/Category";
 import styles from "./App.module.scss";
-<<<<<<< HEAD
+
 import { useState } from "react";
 import { getLocalStorage } from "./localStorage";
-=======
->>>>>>> 90c2fe3855ac650e39636c1be345fcd3973566d5
+
+
 
 function App() {
   const [isregister, setIsregister] = useState(false);
   const res=getLocalStorage('user');
   return (
     <div className={styles.app}>
-<<<<<<< HEAD
+
       {res ? (
         <>
           <Header />
@@ -45,21 +45,8 @@ function App() {
             <Route path="/exit" element={<Exit />} />
         </Routes>
       )}
-=======
-      <Header />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/basket" element={<Basket />} />
-        <Route path="/favorite" element={<Favorite />} />
-        <Route path="/order" element={<Order />} />
-        <Route path="/category" element={<Category />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/add-product" element={<AddProduct />} />
-        <Route path="/my-product" element={<MyProduct />} />
-        <Route path="/exit" element={<Exit />} />
-      </Routes>
-      <Footer />
->>>>>>> 90c2fe3855ac650e39636c1be345fcd3973566d5
+
+      
     </div>
   );
 }
