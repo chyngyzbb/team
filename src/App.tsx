@@ -1,23 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-<<<<<<< HEAD
-import "./App.css";
-import Home from "./page/Home";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
-import Kontakty from "./page/Kontakty";
 
-function App() {
-  return (
-    <>
-      <Header />
-      <Routes>
-        <Route path="/" element={<Home />} />
-      </Routes>
-      <Kontakty />
-      <Footer />
-    </>
-=======
-// import "./App.css";
 import Home from "./page/Home";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -29,7 +11,7 @@ import AddProduct from "./page/AddProduct";
 import MyProduct from "./page/MyProduct";
 import Exit from "./page/Exit";
 import Category from "./page/Category";
-import styles from './App.module.scss'
+import styles from "./App.module.scss";
 
 function App() {
   return (
@@ -44,11 +26,10 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/add-product" element={<AddProduct />} />
         <Route path="/my-product" element={<MyProduct />} />
-        <Route path="/exit" element={<Exit/>} />
+        <Route path="/exit" element={<Exit />} />
       </Routes>
       <Footer />
     </div>
->>>>>>> a87e755b101ae03298fffa9439870200655f4eed
   );
 }
 
