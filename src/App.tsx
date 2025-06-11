@@ -35,6 +35,9 @@ function App() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/add-product" element={<AddProduct />} />
             <Route path="/my-product" element={<MyProduct />} />
+            <Route path="/contacts" element={<Contacts />} />
+            <Route path="/vakansii" element={<Vakansii />} />
+            <Route path="/about" element={<About/>} />
             <Route path="/" element={<Exit />} />
           </Routes>
           <Footer />

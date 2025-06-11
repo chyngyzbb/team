@@ -3,7 +3,7 @@ import "./Vakansii.css";
 
 function Vakansii() {
   return (
-    <div className="vacancies-page">
+    <div className="vacancies-page container">
       <div className="vacancies-container">
         <h2 className="vacancies-title">Вакансии</h2>
         <div className="vacancies-grid">
