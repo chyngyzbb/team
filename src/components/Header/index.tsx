@@ -16,6 +16,9 @@ import styles from "./Header.module.scss";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { setUser } from "../../store/slice/authSlice";
+import { RootState } from "../../store/store";
 // import Button from '@mui/material/Button';
 
 const pages = ["Главная","Избранные", "Заказы", "Карзина","Категория"];
@@ -30,6 +33,9 @@ function Header() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const navigate = useNavigate();
+  const dispatch=useDispatch()
+    const state=useSelector((state :RootState)=>state)
+
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -47,6 +53,12 @@ function Header() {
   };
 
   const top10 = ["Apple", "Car", "Home"];
+
+function exit(){
+  dispatch(setUser(null))
+  return "/exit"
+}
+
   return (
     <AppBar
     className={styles.appbar}
@@ -172,6 +184,7 @@ function Header() {
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
               </IconButton>
             </Tooltip>
+            <p>{state.auth.user?state.auth.user:'Войти'}</p>
             <Menu
               sx={{ mt: "45px" }}
               id="menu-appbar"
@@ -200,7 +213,8 @@ function Header() {
                           ? "/my-product"
                           : idx === 2
                           ? "/add-product"
-                          : "/exit"
+                          : exit()
+                          
                       }`
                     )
                   }

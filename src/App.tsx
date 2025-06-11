@@ -17,25 +17,35 @@ import About from "./page/About";
 import Contacts from "./page/Kontakty";
 import Vakansii from "./page/Vakansii";
 
+import { useState } from "react";
+import { getLocalStorage } from "./localStorage";
+
 function App() {
+  const [isregister, setIsregister] = useState(false);
+  const res = getLocalStorage("user");
   return (
     <div className={styles.app}>
-      <Header />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/basket" element={<Basket />} />
-        <Route path="/favorite" element={<Favorite />} />
-        <Route path="/order" element={<Order />} />
-        <Route path="/category" element={<Category />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/add-product" element={<AddProduct />} />
-        <Route path="/my-product" element={<MyProduct />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/contacts" element={<Contacts />} />
-        <Route path="/vakansii" element={<Vakansii />} />
-        <Route path="/exit" element={<Exit />} />
-      </Routes>
-      <Footer />
+      {res ? (
+        <>
+          <Header />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/basket" element={<Basket />} />
+            <Route path="/favorite" element={<Favorite />} />
+            <Route path="/order" element={<Order />} />
+            <Route path="/category" element={<Category />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/add-product" element={<AddProduct />} />
+            <Route path="/my-product" element={<MyProduct />} />
+            <Route path="/exit" element={<Exit />} />
+          </Routes>
+          <Footer />
+        </>
+      ) : (
+        <Routes>
+          <Route path="/exit" element={<Exit />} />
+        </Routes>
+      )}
     </div>
   );
 }
