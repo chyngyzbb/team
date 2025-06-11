@@ -1,0 +1,34 @@
+.root{
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    form{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: #826f6f;
+        padding: 40px;
+        gap: 30px;
+        border-radius: 10px;
+        input{
+            width: 300px;
+            height: 50px;
+            border-radius: 3px;
+            outline: none;
+            border: none;
+            text-align: center;
+        }
+        button{
+            width: 150px;
+            height: 50px;
+            background: green;
+            color: white;
+            border: none;
+            border-radius: 20px;
+
+        }
+
+    }
+}

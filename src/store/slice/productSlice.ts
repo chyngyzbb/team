@@ -1,5 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { fetchProducts, Product } from "../../api/api";
+import { createProduct, deleteProduct, fetchProducts, Product } from "../../api/api";
+
+
 
 const initialState: ProductState = {
   products: [],
@@ -28,6 +30,14 @@ const productSlice = createSlice({
         state.loading = false;
         state.error = action.payload as string;
       });
+         // POST
+    builder.addCase(createProduct.fulfilled, (state, action) => {
+      state.products.push(action.payload);
+    });
+       // DELETE
+    builder.addCase(deleteProduct.fulfilled, (state, action) => {
+      state.products = state.products.filter(p => p.id !== action.payload);
+    });
   },
 });
 
