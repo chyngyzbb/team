@@ -1,5 +1,6 @@
 import React from "react";
 import "./Kontakty.css";
+
 function Contacts() {
   return (
     <section className="contacts">

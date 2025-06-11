@@ -1,0 +1,60 @@
+.vakansii {
+  background-color: #f9f5ec;
+  color: #333;
+  font-family: sans-serif;
+  min-height: 100vh;
+  padding: 3rem 1rem;
+}
+
+.vacancies-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.vacancies-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+}
+
+.vacancies-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.vacancy-card {
+  background: #fff;
+  padding: 1.5rem;
+  border: 1px solid #eee;
+  border-radius: 1rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.vacancy-position {
+  font-size: 1.125rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.vacancy-section {
+  margin-bottom: 0.75rem;
+}
+
+.vacancy-label {
+  font-weight: 600;
+}
+
+.vacancy-text {
+  font-size: 0.875rem;
+  color: #555;
+}
+
+.vacancy-contact {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: #666;
+}

@@ -1,4 +1,5 @@
 import { Route, Routes } from "react-router-dom";
+import "tailwindcss";
 
 import Home from "./page/Home";
 import Header from "./components/Header";
@@ -12,6 +13,9 @@ import MyProduct from "./page/MyProduct";
 import Exit from "./page/Exit";
 import Category from "./page/Category";
 import styles from "./App.module.scss";
+import About from "./page/About";
+import Contacts from "./page/Kontakty";
+import Vakansii from "./page/Vakansii";
 
 function App() {
   return (
@@ -26,6 +30,9 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/add-product" element={<AddProduct />} />
         <Route path="/my-product" element={<MyProduct />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contacts" element={<Contacts />} />
+        <Route path="/vakansii" element={<Vakansii />} />
         <Route path="/exit" element={<Exit />} />
       </Routes>
       <Footer />
