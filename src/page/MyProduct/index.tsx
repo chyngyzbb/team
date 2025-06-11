@@ -16,8 +16,10 @@ const MyProduct: React.FC = () => {
   const { error, loading, products } = useSelector(
     (state: RootState) => state.product
   );
+      const users=useSelector((state :RootState)=>state.auth.user)
+  const text= 'У вас нет товаров!'
 
-  const res=products.data?.filter((el)=>el.user?el:'')
+  const res=products.data?.filter((el)=>el.user === users ? el : undefined)
   console.log(res);
   
   // const products= useSelector(
@@ -69,7 +71,7 @@ function removeFunc(id){
             </Card>
           ))
         ) : (
-          <p></p>
+          <p>У вас нет товаров!</p>
         )}
       </div>
     </div>

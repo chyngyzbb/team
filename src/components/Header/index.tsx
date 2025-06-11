@@ -159,7 +159,7 @@ function exit(){
                 onClick={() =>
                   navigate(
                     `${
-                      idx === 0 ? "/":idx === 1 ? "/favorite" : idx === 2 ? "/order" :idx===3? "/basket":idx===4?'/category':''
+                      idx === 0 ? "/home":idx === 1 ? "/favorite" : idx === 2 ? "/order" :idx===3? "/basket":idx===4?'/category':''
                     }`
                   )
                 }

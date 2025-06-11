@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setError, setLoading, setUser } from "../../store/slice/authSlice";
 import { login, register } from "../../services/authService";
@@ -21,18 +21,21 @@ const Exit = () => {
       if (isregister) {
         const res = await register(email, password);
         dispatch(setUser(res.user.email));
-        navigate("/");
+        navigate("/home");
         // console.log(res);
       } else {
         const res = await login(email, password);
         //    console.log(res);
         dispatch(setUser(res.user.email));
-        navigate("/");
+        navigate("/home");
       }
     } catch (err: any) {
       dispatch(setError(err.message));
     }
   };
+  useEffect(()=>{
+
+  },[dispatch])
 
   return (
     <div className={styles.root}>

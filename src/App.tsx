@@ -1,6 +1,4 @@
 import { Route, Routes } from "react-router-dom";
-import "tailwindcss";
-
 import Home from "./page/Home";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -17,19 +15,19 @@ import About from "./page/About";
 import Contacts from "./page/Kontakty";
 import Vakansii from "./page/Vakansii";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { getLocalStorage } from "./localStorage";
 
 function App() {
-  const [isregister, setIsregister] = useState(false);
-  const res = getLocalStorage("user");
+  // const [isregister, setIsregister] = useState(false);
+  const user = getLocalStorage("user");
   return (
-    <div className={styles.app}>
-      {res ? (
+    <div>
+      {user ? (
         <>
           <Header />
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/home" element={<Home />} />
             <Route path="/basket" element={<Basket />} />
             <Route path="/favorite" element={<Favorite />} />
             <Route path="/order" element={<Order />} />
@@ -37,13 +35,15 @@ function App() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/add-product" element={<AddProduct />} />
             <Route path="/my-product" element={<MyProduct />} />
-            <Route path="/exit" element={<Exit />} />
+            <Route path="/" element={<Exit />} />
           </Routes>
           <Footer />
         </>
       ) : (
         <Routes>
           <Route path="/exit" element={<Exit />} />
+
+          <Route path="/" element={<Exit />} />
         </Routes>
       )}
     </div>

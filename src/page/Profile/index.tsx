@@ -24,13 +24,13 @@ const Profile = () => {
       if (isregister) {
         const res = await register(email, password);
         dispatch(setUser(res.user.email));
-        navigate("/");
+        navigate("/home");
         // console.log(res);
       } else {
         const res = await login(email, password);
         //    console.log(res);
         dispatch(setUser(res.user.email));
-        navigate("/");
+        navigate("/home");
       }
     } catch (err: any) {
       dispatch(setError(err.message));
