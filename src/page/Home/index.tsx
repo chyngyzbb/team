@@ -53,6 +53,7 @@ const Home: React.FC = () => {
                   Lizards are a widespread group of squamate reptiles, with over
                   6,000 species, ranging across all continents except Antarctica
                 </Typography>
+                <h6>{el.user}</h6>
                 <Typography>{el.price} $</Typography>
               </CardContent>
               <CardActions>

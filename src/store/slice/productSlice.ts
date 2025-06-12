@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { createProduct, deleteProduct, fetchProducts, Product } from "../../api/api";
+import { createProduct, deleteProduct, fetchProducts, Product, updateProduct } from "../../api/api";
 
 
 
@@ -37,6 +37,11 @@ const productSlice = createSlice({
        // DELETE
     builder.addCase(deleteProduct.fulfilled, (state, action) => {
       state.products = state.products.filter(p => p.id !== action.payload);
+    });
+    // PUT
+    builder.addCase(updateProduct.fulfilled, (state, action) => {
+      const index = state.products.findIndex(p => p.id === action.payload.id);
+      if (index !== -1) state.products[index] = action.payload;
     });
   },
 });

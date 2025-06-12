@@ -48,3 +48,14 @@ export const deleteProduct = createAsyncThunk<string, string>(
     return id;
   }
 );
+
+// 🔵 PUT
+export const updateProduct = createAsyncThunk<Product, Product>(
+  "products/updateProduct",
+  async (id,updatedProduct) => {
+    console.log(id,updateProduct);
+    
+    const res = await axios.put(`${API_URL}/${id}`, updatedProduct);
+    return res.data;
+  }
+);
