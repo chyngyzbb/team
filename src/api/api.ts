@@ -3,7 +3,8 @@ import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
 
 
-const API_URL='https://api-crud.elcho.dev/api/v1/d7f73-daf9b-15876/products'
+// const API_URL='https://api-crud.elcho.dev/api/v1/d7f73-daf9b-15876/products'
+const API_URL2='https://6765634852b2a7619f5f643f.mockapi.io/redux'
 
 export interface Product {
   id: string;
@@ -22,7 +23,7 @@ export const fetchProducts = createAsyncThunk<Product[]>(
   'products/fetchProducts',
   async (_, { rejectWithValue }) => {
     try {
-      const response = await axios.get<Product[]>(API_URL);
+      const response = await axios.get<Product[]>(API_URL2);
       return response.data;
     } catch (err: any) {
       return rejectWithValue(err.message);
@@ -35,7 +36,7 @@ export const fetchProducts = createAsyncThunk<Product[]>(
 export const createProduct = createAsyncThunk<Product, Omit<Product, "id">>(
   "products/createProduct",
   async (newProduct) => {
-    const res = await axios.post(API_URL, newProduct);
+    const res = await axios.post(API_URL2, newProduct);
     return res.data;
   }
 );
@@ -44,7 +45,7 @@ export const createProduct = createAsyncThunk<Product, Omit<Product, "id">>(
 export const deleteProduct = createAsyncThunk<string, string>(
   "products/deleteProduct",
   async (id) => {
-    await axios.delete(`${API_URL}/${id}`);
+    await axios.delete(`${API_URL2}/${id}`);
     return id;
   }
 );
@@ -55,7 +56,7 @@ export const updateProduct = createAsyncThunk<Product, Product>(
   async (id,updatedProduct) => {
     console.log(id,updateProduct);
     
-    const res = await axios.put(`${API_URL}/${id}`, updatedProduct);
+    const res = await axios.put(`${API_URL2}/${id}`, updatedProduct);
     return res.data;
   }
 );

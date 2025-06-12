@@ -24,7 +24,7 @@ const MyProduct: React.FC = () => {
   );
   const users = useSelector((state: RootState) => state.auth.user);
 
-  const res = products.data?.filter((el) =>
+  const res = products?.filter((el) =>
     el.user === users ? el : undefined
   );
   console.log(res);
@@ -95,7 +95,7 @@ const MyProduct: React.FC = () => {
         </Modal>
       </div>
       <div className={styles.root}>
-        {products.data && products.data.length > 0 ? (
+        {products && products.length > 0 ? (
           res.map((el, idx) => (
             <Card key={idx} sx={{ maxWidth: 305 }}>
               <CardMedia

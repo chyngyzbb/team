@@ -28,7 +28,7 @@ const Home: React.FC = () => {
     dispatch(fetchProducts());
   }, [dispatch]);
 
-  console.log("myProduct:", products.data);
+  console.log("HomeProduct:", products);
   // console.log(fetchProducts());
 
   if (loading) return <p>Жүктөлүүдө...</p>;
@@ -37,8 +37,8 @@ const Home: React.FC = () => {
   return (
     <div className="container">
       <div className={styles.root}>
-        {products.data && products.data.length > 0 ? (
-          products.data.map((el, idx) => (
+        {products && products.length > 0 ? (
+          products.map((el, idx) => (
             <Card key={idx} sx={{ maxWidth: 305 }}>
               <CardMedia
                 sx={{ height: 140 }}
