@@ -54,7 +54,7 @@ const Home: React.FC = () => {
                   6,000 species, ranging across all continents except Antarctica
                 </Typography>
                 <h6>{el.user}</h6>
-                <Typography>{el.price} $</Typography>
+                <Typography>{el.price} сом</Typography>
               </CardContent>
               <CardActions>
                 <Button variant="outlined" color="error">
