@@ -21,7 +21,7 @@ import { setUser } from "../../store/slice/authSlice";
 import { RootState } from "../../store/store";
 // import Button from '@mui/material/Button';
 
-const pages = ["Главная","Избранные", "Заказы", "Карзина","Категория"];
+const pages = ["Все","Ползовательи", "Заказы", "Карзина","Категория"];
 const settings = [
   "Профил",
   "Мои продукты",

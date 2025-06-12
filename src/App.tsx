@@ -14,9 +14,9 @@ import styles from "./App.module.scss";
 import About from "./page/About";
 import Contacts from "./page/Kontakty";
 import Vakansii from "./page/Vakansii";
-
 import { useEffect, useState } from "react";
 import { getLocalStorage } from "./localStorage";
+import DetailPage from "./components/DetailPage";
 
 function App() {
   // const [isregister, setIsregister] = useState(false);
@@ -39,6 +39,7 @@ function App() {
             <Route path="/vakansii" element={<Vakansii />} />
             <Route path="/about" element={<About/>} />
             <Route path="/" element={<Exit />} />
+            <Route path="/detail-page" element={<DetailPage />} />
           </Routes>
           <Footer />
         </>

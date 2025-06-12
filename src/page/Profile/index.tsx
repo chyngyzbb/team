@@ -38,7 +38,7 @@ const Profile = () => {
   };
 
   return (
-    <div>
+    <div className="container" style={{textAlign:"center",padding:'50px 0', background:'grey',height:'70vh'}}>
     <h1>{user}</h1>
       <button onClick={() => setIsregister(!isregister)}>Алмаштыруу</button>
       <h1>{isregister ? "Катталуу" : "Логин"}</h1>
