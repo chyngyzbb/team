@@ -1,5 +1,5 @@
 // store/slices/productSlice.ts
-import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
+import { createAsyncThunk, } from "@reduxjs/toolkit";
 import axios from "axios";
 
 
@@ -7,9 +7,10 @@ import axios from "axios";
 const API_URL2='https://6765634852b2a7619f5f643f.mockapi.io/redux'
 
 export interface Product {
-  id: string;
+  _id: string;
   name: string;
   price: number;
+  image:string;
 }
 
 interface ProductState {
@@ -53,10 +54,10 @@ export const deleteProduct = createAsyncThunk<string, string>(
 // 🔵 PUT
 export const updateProduct = createAsyncThunk<Product, Product>(
   "products/updateProduct",
-  async (id,updatedProduct) => {
-    console.log(id,updateProduct);
+  async (updateProductInfo) => {
+    console.log(updateProductInfo);
     
-    const res = await axios.put(`${API_URL2}/${id}`, updatedProduct);
+    const res = await axios.put(`${API_URL2}/${updateProductInfo._id}`, {...updateProductInfo.newPro,_id:updateProductInfo._id});
     return res.data;
   }
 );

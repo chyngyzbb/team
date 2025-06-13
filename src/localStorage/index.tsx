@@ -8,6 +8,15 @@ export const getLocalStorage =(key)=> {
   return data ? JSON.parse(data) : null;
 };
 
+export const getBasketLocalStorage=(key)=>{
+  const data=localStorage.getItem(key);
+  return data? JSON.parse(data) : [];
+  // console.log(res);
+  // return res
+  
+}
+
+
 
 // export const saveToUser=async()
 

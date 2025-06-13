@@ -17,7 +17,7 @@ const MyProduct: React.FC = () => {
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [url, setUrl] = useState("");
-  const [edit, setEdit] = useState("");
+  const [idT, setIdT] = useState("");
   const dispatch = useDispatch();
   const { error, loading, products } = useSelector(
     (state: RootState) => state.product
@@ -32,20 +32,20 @@ const MyProduct: React.FC = () => {
   // const products= useSelector(
   //   (state: RootState) => state.product.products.data
   // );
-  let idT=''
   let newPro={
     name,
     price,
-    url
+    image:url,
+    _id:idT
   }
-  function removeFunc(id) {
+  function removeFunc(id:string) {
     dispatch(deleteProduct(id));
   }
-  function editFunk(el) {
-    idT=el._id
+  function editFunk(el:string) {
+    setIdT(el._id)
     handleOpen()
   }
-  function putFunc(_id){
+  function putFunc(_id:string){
     dispatch(updateProduct({_id,newPro}))
   }
   useEffect(() => {
@@ -79,7 +79,6 @@ const MyProduct: React.FC = () => {
   return (
     <div className="container">
       <div className="modal">
-        <Button >Open modal</Button>
         <Modal
           open={open}
           onClose={handleClose}

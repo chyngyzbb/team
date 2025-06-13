@@ -10,6 +10,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import styles from "./Home.module.scss";
 import Stack from "@mui/material/Stack";
+import ProductCard from "../../components/ProductCard";
 
 const Home: React.FC = () => {
   const dispatch = useDispatch();
@@ -17,9 +18,9 @@ const Home: React.FC = () => {
     (state: RootState) => state.product
   );
 
-  const res=products.data?.filter((el)=>el.user?el:'')
+  const res = products.data?.filter((el) => (el.user ? el : ""));
   console.log(res);
-  
+
   // const products= useSelector(
   //   (state: RootState) => state.product.products.data
   // );
@@ -36,35 +37,37 @@ const Home: React.FC = () => {
 
   return (
     <div className="container">
+      <h3>Общие карточки: {products.length}шт</h3>
       <div className={styles.root}>
         {products && products.length > 0 ? (
           products.map((el, idx) => (
-            <Card key={idx} sx={{ maxWidth: 305 }}>
-              <CardMedia
-                sx={{ height: 140 }}
-                image={el.image}
-                title="green iguana"
-              />
-              <CardContent>
-                <Typography gutterBottom variant="h5" component="div">
-                  {el.name}
-                </Typography>
-                <Typography variant="body2" sx={{ color: "text.secondary" }}>
-                  Lizards are a widespread group of squamate reptiles, with over
-                  6,000 species, ranging across all continents except Antarctica
-                </Typography>
-                <h6>{el.user}</h6>
-                <Typography>{el.price} сом</Typography>
-              </CardContent>
-              <CardActions>
-                <Button variant="outlined" color="error">
-                  В карзину
-                </Button>
-                <Button variant="contained" color="success">
-                  Заказат
-                </Button>
-              </CardActions>
-            </Card>
+            <ProductCard el={el} idx={idx} />
+            // <Card key={idx} sx={{ maxWidth: 305 }}>
+            //   <CardMedia
+            //     sx={{ height: 140 }}
+            //     image={el.image}
+            //     title="green iguana"
+            //   />
+            //   <CardContent>
+            //     <Typography gutterBottom variant="h5" component="div">
+            //       {el.name}
+            //     </Typography>
+            //     <Typography variant="body2" sx={{ color: "text.secondary" }}>
+            //       Lizards are a widespread group of squamate reptiles, with over
+            //       6,000 species, ranging across all continents except Antarctica
+            //     </Typography>
+            //     <h6>{el.user}</h6>
+            //     <Typography>{el.price} сом</Typography>
+            //   </CardContent>
+            //   <CardActions>
+            //     <Button variant="outlined" color="error">
+            //       В карзину
+            //     </Button>
+            //     <Button variant="contained" color="success">
+            //       Заказат
+            //     </Button>
+            //   </CardActions>
+            // </Card>
           ))
         ) : (
           <p></p>

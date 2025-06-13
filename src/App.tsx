@@ -22,7 +22,7 @@ function App() {
   // const [isregister, setIsregister] = useState(false);
   const user = getLocalStorage("user");
   return (
-    <div>
+    <div style={{height:'100vh'}}>
       {user ? (
         <>
           <Header />
@@ -39,14 +39,12 @@ function App() {
             <Route path="/vakansii" element={<Vakansii />} />
             <Route path="/about" element={<About/>} />
             <Route path="/" element={<Exit />} />
-            <Route path="/detail-page" element={<DetailPage />} />
+            <Route path="/detail-page/:user" element={<DetailPage />} />
           </Routes>
           <Footer />
         </>
       ) : (
         <Routes>
-          <Route path="/exit" element={<Exit />} />
-
           <Route path="/" element={<Exit />} />
         </Routes>
       )}
