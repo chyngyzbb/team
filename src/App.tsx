@@ -17,6 +17,10 @@ import Vakansii from "./page/Vakansii";
 import { useEffect, useState } from "react";
 import { getLocalStorage } from "./localStorage";
 import DetailPage from "./components/DetailPage";
+import Message from "./page/Message";
+import 'flowbite';
+
+
 
 function App() {
   // const [isregister, setIsregister] = useState(false);
@@ -38,6 +42,7 @@ function App() {
             <Route path="/contacts" element={<Contacts />} />
             <Route path="/vakansii" element={<Vakansii />} />
             <Route path="/about" element={<About/>} />
+            <Route path="/message" element={<Message/>} />
             <Route path="/" element={<Exit />} />
             <Route path="/detail-page/:user" element={<DetailPage />} />
           </Routes>

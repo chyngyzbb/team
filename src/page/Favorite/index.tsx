@@ -32,7 +32,7 @@
 // };
 
 // export default Favorite;
-import * as React from "react";
+import { TiMessages } from "react-icons/ti";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import Divider from "@mui/material/Divider";
@@ -43,10 +43,34 @@ import Typography from "@mui/material/Typography";
 import { useSelector } from "react-redux";
 import styles from "./Favorite.module.scss";
 import { useNavigate } from "react-router-dom";
+import * as React from "react";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Modal from "@mui/material/Modal";
+import { TextField } from "@mui/material";
+import axios from "axios";
+
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 600,
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  p: 4,
+};
 
 export default function Favorite() {
   const navigate = useNavigate();
+  const [message,setMessage]=React.useState('')
+  const [userMessage,setUserMessage]=React.useState('')
   const user = useSelector((state) => state.product.products);
+  const sender = useSelector((state) => state.auth.user);
+
+  const api='https://680dcc8ec47cb8074d913800.mockapi.io/message'
+
   let res = [];
   user.map((el) => {
     if (res.includes(el.user)) {
@@ -56,9 +80,53 @@ export default function Favorite() {
     }
   });
 
-  console.log("User:", res);
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = (el) =>{ 
+    setUserMessage(el)
+    setOpen(true);}
+  const handleClose = () => setOpen(false);
+
+  console.log(message);
+  console.log(userMessage);
+  console.log(sender);
+  console.log(new Date());
+  
+
+  const newMessage={
+    recipient:userMessage,
+    message,
+    sender,
+    date:new Date()
+  }
+  async function sendMessage(){
+    console.log(newMessage);
+    const res=await axios.post(api,newMessage)
+    return res.data
+    
+  }
+
+
   return (
     <div className="container">
+      <div>
+        {/* <Button onClick={handleOpen}>Open modal</Button> */}
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            <h4>{userMessage}</h4>
+            <TextField onChange={(e)=>setMessage(e.target.value)} id="filled-basic" label="Сообщения" variant="filled" />
+            <Button
+            onClick={()=>sendMessage()}
+            variant="contained" color="success">
+              Отправить
+            </Button>
+          </Box>
+        </Modal>
+      </div>
       <List sx={{ width: "100wh", padding: "50px 0" }}>
         {res.map((el, idx) => (
           // <li onClick={() => navigate(`/detail-page/${el}`)}>
@@ -73,7 +141,7 @@ export default function Favorite() {
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
               </ListItemAvatar>
               <ListItemText
-              onClick={() => navigate(`/detail-page/${el}`)}
+                onClick={() => navigate(`/detail-page/${el}`)}
                 primary={el}
                 secondary={
                   <React.Fragment>
@@ -84,10 +152,12 @@ export default function Favorite() {
                     >
                       {/* Ali Connors */}
                     </Typography>
+
                     {/* {" — I'll be in your neighborhood doing errands this…"} */}
                   </React.Fragment>
                 }
               />
+              <TiMessages onClick={()=>handleOpen(el)} style={{ fontSize: "30px" }} />
             </ListItem>
             <Divider variant="inset" component="li" />
           </div>

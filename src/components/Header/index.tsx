@@ -21,21 +21,21 @@ import { setUser } from "../../store/slice/authSlice";
 import { RootState } from "../../store/store";
 // import Button from '@mui/material/Button';
 
-const pages = ["Все","Ползовательи", "Заказы", "Карзина","Категория"];
+const pages = ["Все", "Ползовательи", "Заказы", "Карзина", "Категория"];
 const settings = [
   "Профил",
   "Мои продукты",
   "Добавит продукт",
-  "Выйти аккаунта",
+  "Сообщения",
+  "Выйти аккаунта"
 ];
 
 function Header() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const navigate = useNavigate();
-  const dispatch=useDispatch()
-    const state=useSelector((state :RootState)=>state)
-
+  const dispatch = useDispatch();
+  const state = useSelector((state: RootState) => state);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -54,17 +54,17 @@ function Header() {
 
   const top10 = ["Apple", "Car", "Home"];
 
-function exit(){
-  dispatch(setUser(null))
-  return "/exit"
-}
+  function exit() {
+    dispatch(setUser(null));
+    return "/";
+  }
 
   return (
     <AppBar
-    className={styles.appbar}
+      className={styles.appbar}
       position="static"
       style={{
-       background:'#fadd72'
+        background: "#fadd72",
         // height:'80px'
       }}
     >
@@ -159,7 +159,17 @@ function exit(){
                 onClick={() =>
                   navigate(
                     `${
-                      idx === 0 ? "/home":idx === 1 ? "/favorite" : idx === 2 ? "/order" :idx===3? "/basket":idx===4?'/category':''
+                      idx === 0
+                        ? "/home"
+                        : idx === 1
+                        ? "/favorite"
+                        : idx === 2
+                        ? "/order"
+                        : idx === 3
+                        ? "/basket"
+                        : idx === 4
+                        ? "/category"
+                        : ""
                     }`
                   )
                 }
@@ -184,7 +194,7 @@ function exit(){
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
               </IconButton>
             </Tooltip>
-            <p>{state.auth.user?state.auth.user:'Войти'}</p>
+            <p>{state.auth.user ? state.auth.user : "Войти"}</p>
             <Menu
               sx={{ mt: "45px" }}
               id="menu-appbar"
@@ -213,8 +223,9 @@ function exit(){
                           ? "/my-product"
                           : idx === 2
                           ? "/add-product"
-                          : exit()
-                          
+                          : idx===3
+                          ? "/message"
+                          : "/"
                       }`
                     )
                   }

@@ -21,7 +21,7 @@ const basketSlice=createSlice({
     initialState,
     reducers:{
         setBasket(state,action:PayloadAction<Product[]>){
-            // console.log(action.payload);           
+            // console.log(action.payload);            
             state.basket.push(action.payload)
             saveToLocalStorage('basket',state.basket)
         }

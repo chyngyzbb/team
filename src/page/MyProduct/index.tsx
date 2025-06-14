@@ -106,9 +106,9 @@ const MyProduct: React.FC = () => {
                 <Typography gutterBottom variant="h5" component="div">
                   {el.name}
                 </Typography>
-                <Typography variant="body2" sx={{ color: "text.secondary" }}>
-                  Lizards are a widespread group of squamate reptiles, with over
-                  6,000 species, ranging across all continents except Antarctica
+                <Typography variant="body2" sx={{display:'flex',flexDirection:'column', color: "red" }}>
+                  {/* {el.client.map((cli)=>cli.length>2?`Заказали: ${cli}`:`нет`)} */}
+                  {el.client.length>0?`Заказали: ${el.client.map(el=>el)}`:``}
                 </Typography>
                 <Typography>{el.price} $</Typography>
               </CardContent>

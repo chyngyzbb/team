@@ -10,7 +10,7 @@ export const getLocalStorage =(key)=> {
 
 export const getBasketLocalStorage=(key)=>{
   const data=localStorage.getItem(key);
-  return data? JSON.parse(data) : [];
+  return data   ? JSON.parse(data) : [];
   // console.log(res);
   // return res
   

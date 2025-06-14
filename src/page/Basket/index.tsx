@@ -1,37 +1,57 @@
-// import React, { useState } from 'react';
-// import { useSelector } from 'react-redux';
 
-// const Basket  = () => {
-
-//     const state=useSelector((state)=>state.basket.basket)
-//     console.log(state);
-
-//     return (
-//          <div>
-
-//         </div>
-//     );
-// };
-
-// export default Basket ;
 import * as React from "react";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import Divider from "@mui/material/Divider";
 import ListItemText from "@mui/material/ListItemText";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
-import Avatar from "@mui/material/Avatar";
+import Avatar from "@mui/material/Avatar";  
 import Typography from "@mui/material/Typography";
-import { useSelector } from "react-redux";
-import { Button, ImageList, ImageListItem } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import { Button} from "@mui/material";
+import { updateProduct } from "../../api/api";
+import { saveToLocalStorage } from "../../localStorage";
+import { setBasket } from "../../store/slice/basketSlice";
 
 export default function Basket() {
   const state = useSelector((state) => state.basket.basket);
-  console.log(state);
+  const product = useSelector((state) => state.product.products);
+  const user = useSelector((state) => state.auth.user);
+  const dispatch=useDispatch()
 
+  console.log(product);
+
+  
+  function orderFunc(el){
+    const newPro={
+    name:el.name,
+    price:el.price,
+    image:el.image,
+    _id:el._id,
+    user:el.user,
+    client:[...el.client,user]
+  }
+  const newLoc = state.filter((loc)=>loc._id!==el._id)
+    // if(loc.id!==el.id){
+//       return {...el,...el.client=user}
+//     }else{
+//        return el
+//     }
+//    } 
+// )
+newLoc.push(newPro)
+    dispatch(updateProduct({_id:el._id,newPro}))
+    dispatch(setBasket(newLoc))
+
+    function removeFunc(el){
+console.log(el);
+
+    }
+
+};
   return (
     <div className="container">
-      <List sx={{ width: "100wh", padding: "50px 0" }}>
+      <List sx={{ width: "100vw", padding: "50px 0" }}>
         <h3>Карзина</h3>
         {state.map((el) => (
           <div>
@@ -54,8 +74,16 @@ export default function Basket() {
                       {el.price} сом
                     </Typography>
                     {" — I'll be in your neighborhood doing errands this…"}
-                    <Button variant="contained" color="success">
+                    <Button
+                    onClick={()=>orderFunc(el)}
+                     variant="contained" color="success">
                       Заказат
+                    </Button>
+                     <Button
+                     style={{margin:'0 30px'}}
+                    onClick={()=>removeFunc(el)}
+                     variant="contained" color="error">
+                      Удалит
                     </Button>
                   </React.Fragment>
                 }
