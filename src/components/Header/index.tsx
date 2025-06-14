@@ -1,3 +1,4 @@
+import "./Header2.css";
 import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -54,10 +55,10 @@ function Header() {
 
   const top10 = ["Apple", "Car", "Home"];
 
-  function exit() {
-    dispatch(setUser(null));
-    return "/";
-  }
+function exit(){
+  dispatch(setUser(null))
+  return "/"
+}
 
   return (
     <AppBar
@@ -179,7 +180,7 @@ function Header() {
               </Button>
             ))}
           </Box>
-          <Autocomplete
+          {/* <Autocomplete
             style={{ padding: "20px" }}
             disablePortal
             options={top10}
@@ -187,7 +188,11 @@ function Header() {
             renderInput={(params) => (
               <TextField {...params} label="Найти товар" />
             )}
-          />
+          /> */}
+          <div className="search-wrapper">
+            <input type="text" placeholder=" Я ищу..." />
+            <button className="border">Поиск</button>
+          </div>
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
@@ -226,6 +231,7 @@ function Header() {
                           : idx===3
                           ? "/message"
                           : "/"
+                          
                       }`
                     )
                   }
