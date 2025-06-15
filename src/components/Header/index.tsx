@@ -220,6 +220,7 @@ function exit(){
                 <MenuItem
                   key={setting}
                   onClick={() =>
+                    
                     navigate(
                       `${
                         idx === 0

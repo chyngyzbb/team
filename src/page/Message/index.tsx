@@ -1,11 +1,65 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import Modal from "@mui/material/Modal";
+
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  p: 4,
+};
 
 const Message = () => {
   const api = "https://680dcc8ec47cb8074d913800.mockapi.io/message";
   const [message, setMessage] = useState([]);
   const user = useSelector((state) => state.auth.user);
+ const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  const [sender,setSender]=useState('')
+  const [value,setValue]=useState('')
+
+
+const time=new Date().getHours()
+const time2=new Date().getMinutes()
+const time3=new Date().getSeconds()
+const time4=new Date().getDate()
+const time5=new Date().getMonth()
+const time6=new Date().getFullYear()
+
+console.log();
+
+const dat=`${time6}.${time5}.${time4} _ ${time3}:${time2}:${time}`
+
+  const newMessage={
+    recipient:sender,
+    message:value,
+    sender:user,
+    date:dat
+  }
+  async function sendMessage(){
+    console.log(newMessage);
+    handleClose()
+
+    const res=await axios.post(api,newMessage)
+    return res.data
+    
+  }
+
+
+  function handleOpenFunc(sen){
+    setSender(sen)
+    handleOpen()
+  }
 
   async function getMessage() {
     const res = await axios.get(api);
@@ -16,10 +70,61 @@ const Message = () => {
   useEffect(() => {
     getMessage();
   }, []);
-  console.log(user);
+  console.log(sender);
+ 
 
   return (
-    <div className="container" style={{display:"flex",flexDirection:"column",gap:"10px",padding:"30px 0"}}>
+    <div
+      className="container"
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        gap: "10px",
+        padding: "30px 0",
+      }}
+    >
+      <div>
+        {/* <Button oClick={handleOpen}>Open modal</Button> */}
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            
+<div>
+    <label for="chat" className="sr-only">Your message</label>
+    <div style={{padding:"20px", display:"flex",gap:'5px'}} className="flex items-center px-3 py-2 rounded-lg bg-gray-50 dark:bg-gray-700">
+        <button type="button" className="inline-flex justify-center p-2 text-gray-500 rounded-lg cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+            <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 18">
+                <path fill="currentColor" d="M13 5.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0ZM7.565 7.423 4.5 14h11.518l-2.516-3.71L11 13 7.565 7.423Z"/>
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 1H2a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1Z"/>
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0ZM7.565 7.423 4.5 14h11.518l-2.516-3.71L11 13 7.565 7.423Z"/>
+            </svg>
+            <span className="sr-only">Upload image</span>
+        </button>
+        <button type="button" className="p-2 text-gray-500 rounded-lg cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+            <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.408 7.5h.01m-6.876 0h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0ZM4.6 11a5.5 5.5 0 0 0 10.81 0H4.6Z"/>
+            </svg>
+            <span className="sr-only">Add emoji</span>
+        </button>
+        <textarea onChange={(e)=>setValue(e.target.value)} style={{padding:"4px 10px"}} id="chat" rows="1" className="block mx-4 p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Your message..."></textarea>
+            <button
+            onClick={sendMessage}
+            type="submit" className="inline-flex justify-center p-2 text-blue-600 rounded-full cursor-pointer hover:bg-blue-100 dark:text-blue-500 dark:hover:bg-gray-600">
+            <svg className="w-5 h-5 rotate-90 rtl:-rotate-90" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                <path d="m17.914 18.594-8-18a1 1 0 0 0-1.828 0l-8 18a1 1 0 0 0 1.157 1.376L8 18.281V9a1 1 0 0 1 2 0v9.281l6.758 1.689a1 1 0 0 0 1.156-1.376Z"/>
+            </svg>
+            <span className="sr-only">Send message</span>
+        </button>
+    </div>
+</div>
+
+          </Box>
+        </Modal>
+      </div>
       {myMessage.map((el) => (
         <div className="flex items-start gap-2.5">
           <img
@@ -27,7 +132,10 @@ const Message = () => {
             src="data:image/jpeg;base64,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"
             alt="Jese image"
           />
-          <div style={{padding:"10px"}} className="flex flex-col w-full max-w-[320px] leading-1.5 p-4 border-gray-200 bg-gray-100 rounded-e-xl rounded-es-xl dark:bg-gray-700">
+          <div
+            style={{ padding: "10px" }}
+            className="flex flex-col w-full max-w-[320px] leading-1.5 p-4 border-gray-200 bg-gray-100 rounded-e-xl rounded-es-xl dark:bg-gray-700"
+          >
             <div className="flex items-center space-x-2 rtl:space-x-reverse">
               <span className="text-sm font-semibold text-gray-900 dark:text-white">
                 {el.sender}
@@ -44,6 +152,7 @@ const Message = () => {
             </span>
           </div>
           <button
+          onClick={()=>handleOpenFunc(el.sender)}
             id="dropdownMenuIconButton"
             data-dropdown-toggle="dropdownDots"
             data-dropdown-placement="bottom-start"
@@ -60,7 +169,7 @@ const Message = () => {
               <path d="M3.5 1.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 6.041a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 5.959a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z" />
             </svg>
           </button>
-          <div
+          {/* <div
             id="dropdownDots"
             className="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-40 dark:bg-gray-700 dark:divide-gray-600"
           >
@@ -109,7 +218,7 @@ const Message = () => {
                 </a>
               </li>
             </ul>
-          </div>
+          </div> */}
         </div>
       ))}
 

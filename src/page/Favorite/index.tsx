@@ -91,15 +91,27 @@ export default function Favorite() {
   console.log(sender);
   console.log(new Date());
   
+const time=new Date().getHours()
+const time2=new Date().getMinutes()
+const time3=new Date().getSeconds()
+const time4=new Date().getDate()
+const time5=new Date().getMonth()
+const time6=new Date().getFullYear()
+
+console.log();
+
+const dat=`${time6}.${time5}.${time4} _ ${time3}:${time2}:${time}`
 
   const newMessage={
     recipient:userMessage,
     message,
     sender,
-    date:new Date()
+    date:dat
   }
   async function sendMessage(){
     console.log(newMessage);
+    setOpen(false)
+
     const res=await axios.post(api,newMessage)
     return res.data
     
