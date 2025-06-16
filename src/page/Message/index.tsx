@@ -7,7 +7,7 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import styles from "./Message.module.scss";
 import { TiMessage } from "react-icons/ti";
-import { MdOutlineMessage } from "react-icons/md";
+import { MdOutlineMessage, MdPadding } from "react-icons/md";
 
 
 const style = {
@@ -69,26 +69,16 @@ const Message = () => {
   }
   const myMessage = message.filter((el) => el.recipient === user||el.sender===user);
   const myDialog = myMessage.filter((el) => el.sender === dialog && el.recipient===user ||el.sender===user && el.recipient===dialog);
-//   const userMessage = myMessage.map((el) => {
-//     if(userMessage.includes(el){
-//         ''
-//     })else{
-//         userMessage.push(el)
-//     }
-//   });
- const userMessage = [];
-  if(myMessage.length>0){
-myMessage.map((el) => {
-    if (userMessage.includes(el.sender)) {
-      el;
-    } else {
-      userMessage.push(el.sender);
-    }
-  })
-  }   
   
+  const res=myMessage.map((el)=>el.sender)
+  const res2=myMessage.map((el)=>el.recipient)
+  const res3=[...res,...res2]
+  const userMessage=[...new Set(res3)]
+  console.log(res);
+  console.log(res2);
+  console.log(res3);
   console.log(myMessage);
-  console.log(myDialog);
+  console.log(userMessage);
 
   useEffect(() => {
     getMessage();
@@ -109,13 +99,22 @@ myMessage.map((el) => {
         <div>
           {/* <Button oClick={handleOpen}>Open modal</Button> */}
           <Modal
-        //   style={{display:`${dialog!==''?'block':'none'}`}}
+          style={{bottom:"-310px",right:'-500px'}}
             open={open}
             onClose={handleClose}
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
           >
-            <Box sx={style}>
+            <Box 
+            // sx={style}
+            // style={{with:'300px'}}
+            sx={{width:'300px',
+                height:'200px',
+                position:'fixed',
+                right:"100px",
+                top:"100px"
+            }}
+            >
               <div>
 
                 <label for="chat" className="sr-only">
@@ -181,7 +180,7 @@ myMessage.map((el) => {
                   </button>
                   <textarea
                     onChange={(e) => setValue(e.target.value)}
-                    style={{ padding: "4px 10px" }}
+                    style={{ padding: "10px 10px",width:'700px'}}
                     id="chat"
                     rows="1"
                     className="block mx-4 p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"

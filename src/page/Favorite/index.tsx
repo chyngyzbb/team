@@ -71,14 +71,16 @@ export default function Favorite() {
 
   const api='https://680dcc8ec47cb8074d913800.mockapi.io/message'
 
-  let res = [];
-  user.map((el) => {
-    if (res.includes(el.user)) {
-      el;
-    } else {
-      res.push(el.user);
-    }
-  });
+  const res1=user.map((el)=>el.user)
+  const res=[...new Set(res1)]
+  // let res = [];
+  // user.map((el) => {
+  //   if (res.includes(el.user)) {
+  //     el;
+  //   } else {
+  //     res.push(el.user);
+  //   }
+  // });
 
   const [open, setOpen] = React.useState(false);
   const handleOpen = (el) =>{ 
