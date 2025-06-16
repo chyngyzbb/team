@@ -20,9 +20,10 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../../store/slice/authSlice";
 import { RootState } from "../../store/store";
+import { setSearch } from "../../store/slice/searchSlice";
 // import Button from '@mui/material/Button';
 
-const pages = ["Все", "Ползовательи", "Заказы", "Карзина", "Категория"];
+const pages = ["Все", "Ползовательи", "AIChat", "Карзина", "Категория"];
 const settings = [
   "Профил",
   "Мои продукты",
@@ -34,6 +35,7 @@ const settings = [
 function Header() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [searchValue, setSearchValue] = React.useState('');
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const state = useSelector((state: RootState) => state);
@@ -52,8 +54,17 @@ function Header() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+  function searchFunc(e:string){
+    setSearchValue(e.target.value)
+    sendSearch()
+    
+  }
 
-  const top10 = ["Apple", "Car", "Home"];
+  function sendSearch(){
+    dispatch(setSearch(searchValue))
+  }
+
+  // const top10 = ["Apple", "Car", "Home"];
 
 function exit(){
   dispatch(setUser(null))
@@ -165,7 +176,7 @@ function exit(){
                         : idx === 1
                         ? "/favorite"
                         : idx === 2
-                        ? "/order"
+                        ? "/aichat"
                         : idx === 3
                         ? "/basket"
                         : idx === 4
@@ -190,8 +201,8 @@ function exit(){
             )}
           /> */}
           <div className="search-wrapper">
-            <input type="text" placeholder=" Я ищу..." />
-            <button className="border">Поиск</button>
+            <input onChange={(e)=>searchFunc(e)} style={{color:'black'}} type="text" placeholder=" Я ищу..." />
+            <button onClick={()=>sendSearch()} className="border">Поиск</button>
           </div>
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">

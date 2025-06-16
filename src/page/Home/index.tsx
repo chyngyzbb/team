@@ -14,12 +14,15 @@ import ProductCard from "../../components/ProductCard";
 
 const Home: React.FC = () => {
   const dispatch = useDispatch();
+  const search =useSelector((state)=>state.search.search)
   const { error, loading, products } = useSelector(
     (state: RootState) => state.product
   );
 
-  const res = products.data?.filter((el) => (el.user ? el : ""));
+  const res = products.length>1?products.filter((el) => (el.name.toLowerCase().includes(search.toLowerCase()))):''
+  console.log(search);
   console.log(res);
+  console.log(products);
 
   // const products= useSelector(
   //   (state: RootState) => state.product.products.data
@@ -29,7 +32,7 @@ const Home: React.FC = () => {
     dispatch(fetchProducts());
   }, [dispatch]);
 
-  console.log("HomeProduct:", products);
+  // console.log("HomeProduct:", products);
   // console.log(fetchProducts());
 
   if (loading) return <p>Жүктөлүүдө...</p>;
@@ -37,11 +40,11 @@ const Home: React.FC = () => {
 
   return (
     <div className="container">
-      <h3>Общие карточки: {products.length}шт</h3>
+      <h3>Общие карточки: {res.length}шт</h3>
       <div className={styles.root}>
         {products && products.length > 0 ? (
-          products.map((el, idx) => (
-            <ProductCard el={el} idx={idx} />
+          res.map((el, idx) => (
+            <ProductCard el={el} key={idx} />
             // <Card key={idx} sx={{ maxWidth: 305 }}>
             //   <CardMedia
             //     sx={{ height: 140 }}

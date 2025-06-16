@@ -4,7 +4,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Basket from "./page/Basket";
 import Favorite from "./page/Favorite";
-import Order from "./page/Order";
+// import Order from "./page/Order";
 import Profile from "./page/Profile";
 import AddProduct from "./page/AddProduct";
 import MyProduct from "./page/MyProduct";
@@ -19,6 +19,7 @@ import { getLocalStorage } from "./localStorage";
 import DetailPage from "./components/DetailPage";
 import Message from "./page/Message";
 import 'flowbite';
+import AIChat from "./page/AIChat";
 
 
 
@@ -32,9 +33,10 @@ function App() {
           <Header />
           <Routes>
             <Route path="/home" element={<Home />} />
+            <Route path="/aichat" element={<AIChat />} />
             <Route path="/basket" element={<Basket />} />
             <Route path="/favorite" element={<Favorite />} />
-            <Route path="/order" element={<Order />} />
+            {/* <Route path="/order" element={<Order />} /> */}
             <Route path="/category" element={<Category />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/add-product" element={<AddProduct />} />

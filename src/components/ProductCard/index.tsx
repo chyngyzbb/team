@@ -57,18 +57,18 @@ const ProductCard = ({ el, idx }) => {
     date: dat,
   };
   async function sendMessage() {
-    console.log(newMessage);
+    // console.log(newMessage);
     handleClose();
 
     const res = await axios.post(api, newMessage);
     return res.data;
   }
-  console.log(newMessage);
-  console.log();
+  // console.log(newMessage);
+  // console.log();
 
   function addBasket(el) {
     dispatch(setBasket(el));
-    console.log(el);
+    // console.log(el);
     // arr.push(el)
     //  getBasketLocalStorage('basket',el)
     // saveToLocalStorage('basket',arr)
