@@ -43,7 +43,24 @@ function App() {
             <Route path="/vakansii" element={<Vakansii />} />
             <Route path="/about" element={<About/>} />
             <Route path="/message" element={<Message/>} />
+
+
+
+
+
+
+
+
+
+
+            
             <Route path="/" element={<Exit />} />
+
+
+
+
+
+
             <Route path="/detail-page/:user" element={<DetailPage />} />
           </Routes>
           <Footer />
