@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 
 
-// 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
-// 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
-const API_KEY = "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"; // 🛑 Мына бул жерге өзүңүздүн OpenAI API ачкычыңызды коюңуз
 
+const API_KEY = 0
 const AIChat = () => {
   const [query, setQuery] = useState("");
   const [answer, setAnswer] = useState("");
