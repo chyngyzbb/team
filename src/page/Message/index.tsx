@@ -276,6 +276,7 @@ const Message = () => {
                 display:'flex',
                 flexDirection:`${el.sender===user?'row-reverse':''}`,
                 marginLeft:`${el.sender===user?"200px":''}`,
+                textAlign:`${el.sender===user?"end":''}`
             }}
               className="flex items-start gap-2.5">
                 <img

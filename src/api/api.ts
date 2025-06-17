@@ -61,3 +61,13 @@ export const updateProduct = createAsyncThunk<Product, Product>(
     return res.data;
   }
 );
+// 🔵 PUT
+export const orderProduct = createAsyncThunk<Product, Product>(
+  "products/orderProduct",
+  async (orderProductInfo) => {
+    console.log(orderProductInfo);
+    
+    const res = await axios.put(`${API_URL2}/${orderProductInfo._id}`, {...orderProductInfo.newPro,_id:orderProductInfo._id});
+    return res.data;
+  }
+);

@@ -22,33 +22,66 @@ export default function Basket() {
   console.log(product);
 
   
-  function orderFunc(el){
+//   function orderFunc(el){
     
-    const newPro={
-    name:el.name,
-    price:el.price,
-    image:el.image,
-    _id:el._id,
-    user:el.user,
-    client:{...el.client,user}
+//     const newPro={
+//     name:el.name,
+//     price:el.price,
+//     image:el.image,
+//     _id:el._id,
+//     user:el.user,
+//     client:{...el.client,user}
 
-  }
-  const newLoc = state.filter((loc)=>loc._id!==el._id)
-    // if(loc.id!==el.id){
-//       return {...el,...el.client=user}
-//     }else{
-//        return el
-//     }
-//    } 
-// )
-newLoc.push(newPro)
-    dispatch(updateProduct({_id:el._id,newPro}))
-    // dispatch(setBasket(newLoc))
-console.log(newPro);
-console.log(newLoc);
+//   }
+//   const newLoc = state.filter((loc)=>loc._id!==el._id)
+//     // if(loc.id!==el.id){
+// //       return {...el,...el.client=user}
+// //     }else{
+// //        return el
+// //     }
+// //    } 
+// // )
+// newLoc.push(newPro)
+//     dispatch(updateProduct({_id:el._id,newPro}))
+//     // dispatch(setBasket(newLoc))
+// console.log(newPro);
+// console.log(newLoc);
 
 
-};
+// };
+
+function orderFunc(el) {
+  
+  
+  // let newClientArray = [...el.client,user]
+  // newClientArray.push(user)
+// el.client?el.client.push(user):''
+
+
+  let newPro = {
+    name: el.name,
+    price: el.price,
+    image: el.image,
+    _id: el._id,
+    user: el.user,
+    client: [...el.client,user], // массив менен
+  };
+
+  // const newLoc = state.filter((loc) => loc !== el ? el : '');
+
+  // newLoc.push(newPro);
+  dispatch(updateProduct({ _id: el._id, newPro }));
+
+  // console.log(state);
+  console.log(newPro);
+  // console.log(newLoc);
+  // console.log(newClientArray);
+  console.log(el.client);
+  console.log(el);
+}
+
+
+
     function removeFunc(el){
 console.log(el);
       dispatch(removeBasket(el._id))
@@ -58,8 +91,8 @@ console.log(el);
     <div className="container">
       <List sx={{ width: "100vw", padding: "50px 0" }}>
         <h3>Карзина</h3>
-        {state.map((el) => (
-          <div>
+        {state.map((el,idx) => (
+          <div key={idx}>
             <ListItem
               sx={{  bgcolor: "background.paper", display:'flex',justifyContent:'space-between',gap:'20px' }}
               alignItems="flex-start"
