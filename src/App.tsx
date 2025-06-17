@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import Home from "./page/Home";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
+// import Header from "./components/Header";
+// import Footer from "./components/Footer";
 import Basket from "./page/Basket";
 import Favorite from "./page/Favorite";
 import Order from "./page/Order";
@@ -15,7 +15,7 @@ import About from "./page/About";
 import Contacts from "./page/Kontakty";
 import Vakansii from "./page/Vakansii";
 // import { useEffect, useState } from "react";
-import { getLocalStorage } from "./localStorage";
+// import { getLocalStorage } from "./localStorage";
 import DetailPage from "./components/DetailPage";
 import Message from "./page/Message";
 import 'flowbite';
@@ -24,13 +24,13 @@ import 'flowbite';
 
 function App() {
   // const [isregister, setIsregister] = useState(false);
-  const user = getLocalStorage("user");
+  // const user = getLocalStorage("user");
   return (
     <div style={{height:'100vh'}}>
-      {user ? (
+      {/* {user ? ( */}
         <>
        
-        <Header />
+        {/* <Header /> */}
           <Routes>
             <Route path="/home" element={<Home />} />
             <Route path="/basket" element={<Basket />} />
@@ -44,16 +44,16 @@ function App() {
             <Route path="/vakansii" element={<Vakansii />} />
             <Route path="/about" element={<About/>} />
             <Route path="/message" element={<Message/>} />
-            {/* <Route path="/" element={<Exit />} /> */}
+            <Route path="/" element={<Exit />} />
             <Route path="/detail-page/:user" element={<DetailPage />} />
           </Routes>
-          <Footer />
+          {/* <Footer /> */}
         </>
-    ) : ( 
-        <Routes>
-          <Route path="/" element={<Exit />} />
-        </Routes>
-     )} 
+    {/* // ) : (  */}
+        {/* // <Routes>
+        //   <Route path="/" element={<Exit />} />
+        // </Routes> */}
+    {/* //  )}  */}
     </div>
   );
 }

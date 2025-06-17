@@ -27,8 +27,8 @@ const Exit = () => {
       } else {
         console.log("login");
         const res = await login(email, password);
-        dispatch(setUser(res.user.email));
         navigate("/home");
+        dispatch(setUser(res.user.email));
       }
     } catch (error) {
       if (error instanceof Error) {
@@ -39,7 +39,7 @@ const Exit = () => {
       }
     }
   };
-  useEffect(() => {}, [dispatch]);
+  // useEffect(() => {}, [dispatch]);
 
   return (
     <div className={styles.root}>
