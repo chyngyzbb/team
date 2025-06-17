@@ -29,7 +29,8 @@ function App() {
     <div style={{height:'100vh'}}>
       {user ? (
         <>
-          <Header />
+       
+        <Header />
           <Routes>
             <Route path="/home" element={<Home />} />
             <Route path="/basket" element={<Basket />} />
@@ -43,33 +44,16 @@ function App() {
             <Route path="/vakansii" element={<Vakansii />} />
             <Route path="/about" element={<About/>} />
             <Route path="/message" element={<Message/>} />
-
-
-
-
-
-
-
-
-
-
-            
-            <Route path="/" element={<Exit />} />
-
-
-
-
-
-
+            {/* <Route path="/" element={<Exit />} /> */}
             <Route path="/detail-page/:user" element={<DetailPage />} />
           </Routes>
           <Footer />
         </>
-      ) : (
+    ) : ( 
         <Routes>
           <Route path="/" element={<Exit />} />
         </Routes>
-      )}
+     )} 
     </div>
   );
 }

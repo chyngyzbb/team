@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Button} from "@mui/material";
 import { updateProduct } from "../../api/api";
 import { saveToLocalStorage } from "../../localStorage";
-import { setBasket } from "../../store/slice/basketSlice";
+import { removeBasket, setBasket } from "../../store/slice/basketSlice";
 
 export default function Basket() {
   const state = useSelector((state) => state.basket.basket);
@@ -23,13 +23,15 @@ export default function Basket() {
 
   
   function orderFunc(el){
+    
     const newPro={
     name:el.name,
     price:el.price,
     image:el.image,
     _id:el._id,
     user:el.user,
-    client:[...el.client,user]
+    client:{...el.client,user}
+
   }
   const newLoc = state.filter((loc)=>loc._id!==el._id)
     // if(loc.id!==el.id){
@@ -41,14 +43,17 @@ export default function Basket() {
 // )
 newLoc.push(newPro)
     dispatch(updateProduct({_id:el._id,newPro}))
-    dispatch(setBasket(newLoc))
+    // dispatch(setBasket(newLoc))
+console.log(newPro);
+console.log(newLoc);
 
-    function removeFunc(el){
-console.log(el);
-
-    }
 
 };
+    function removeFunc(el){
+console.log(el);
+      dispatch(removeBasket(el._id))
+
+    }
   return (
     <div className="container">
       <List sx={{ width: "100vw", padding: "50px 0" }}>
@@ -60,7 +65,7 @@ console.log(el);
               alignItems="flex-start"
             >
               <ListItemAvatar>
-                <img width={80} height={50} alt="Remy Sharp" src={el.image} />
+                <img style={{width:'100px',height:'150px'}} alt="Remy Sharp" src={el.image} />
               </ListItemAvatar>
               <ListItemText
                 primary={el.name}

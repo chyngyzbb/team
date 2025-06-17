@@ -198,8 +198,8 @@ const ProductCard = ({ el, idx }) => {
           <Typography variant="body2" sx={{ color: "text.secondary" }}>
             Lizards are a widespread group of squamate reptiles, with over 6,000
             species, ranging across all continents except Antarctica
-          </Typography>
-          <h6 onClick={() => navigate(`/detail-page/${el.user}`)}>{el.user}</h6>
+          </Typography >
+          <h1 style={{color:'blue',fontWeight:'700'}}  onClick={() => navigate(`/detail-page/${el.user}`)}>{el.user}</h1>
           <Typography>{el.price} сом</Typography>
         </CardContent>
         <CardActions

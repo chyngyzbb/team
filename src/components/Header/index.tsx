@@ -23,7 +23,7 @@ import { RootState } from "../../store/store";
 import { setSearch } from "../../store/slice/searchSlice";
 // import Button from '@mui/material/Button';
 
-const pages = ["Все", "Ползовательи", "AIChat", "Карзина", "Категория"];
+const pages = ["Все", "Ползовательи", "Заказы", "Карзина", "Категория"];
 const settings = [
   "Профил",
   "Мои продукты",
@@ -38,7 +38,7 @@ function Header() {
   const [searchValue, setSearchValue] = React.useState('');
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const state = useSelector((state: RootState) => state);
+  const user = useSelector((state: RootState) => state.auth.user);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -65,7 +65,9 @@ function Header() {
   }
 
   // const top10 = ["Apple", "Car", "Home"];
+React.useEffect(()=>{
 
+},[dispatch])
 function exit(){
   dispatch(setUser(null))
   return "/"
@@ -176,7 +178,7 @@ function exit(){
                         : idx === 1
                         ? "/favorite"
                         : idx === 2
-                        ? "/aichat"
+                        ? "/order"
                         : idx === 3
                         ? "/basket"
                         : idx === 4
@@ -210,7 +212,7 @@ function exit(){
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
               </IconButton>
             </Tooltip>
-            <p>{state.auth.user ? state.auth.user : "Войти"}</p>
+            <p>{user ? user : "Войти"}</p>
             <Menu
               sx={{ mt: "45px" }}
               id="menu-appbar"
@@ -242,7 +244,7 @@ function exit(){
                           ? "/add-product"
                           : idx===3
                           ? "/message"
-                          : "/"
+                          : exit()
                           
                       }`
                     )

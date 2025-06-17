@@ -18,6 +18,7 @@ const MyProduct: React.FC = () => {
   const [price, setPrice] = useState("");
   const [url, setUrl] = useState("");
   const [idT, setIdT] = useState("");
+  const [elModal, setElModal] = useState("");
   const dispatch = useDispatch();
   const { error, loading, products } = useSelector(
     (state: RootState) => state.product
@@ -29,9 +30,7 @@ const MyProduct: React.FC = () => {
   );
   console.log(res);
 
-  // const products= useSelector(
-  //   (state: RootState) => state.product.products.data
-  // );
+
   let newPro={
     name,
     price,
@@ -42,18 +41,21 @@ const MyProduct: React.FC = () => {
     dispatch(deleteProduct(id));
   }
   function editFunk(el:string) {
+    setName(el.name)
+    setPrice(el.price)
+    setUrl(el.image)
     setIdT(el._id)
     handleOpen()
   }
   function putFunc(_id:string){
     dispatch(updateProduct({_id,newPro}))
+    handleClose()
   }
   useEffect(() => {
     dispatch(fetchProducts());
   }, [dispatch]);
 
-  console.log("myProduct:", products.data);
-  // console.log(fetchProducts());
+  // console.log("myProduct:", products.data);
 
 
   const style = {
@@ -85,11 +87,12 @@ const MyProduct: React.FC = () => {
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
         >
-          <Box sx={style}>
-            <input  onChange={((e)=>setName(e.target.value))} type="text" />
-            <input  onChange={((e)=>setPrice(e.target.value))} type="text" />
-            <input  onChange={((e)=>setUrl(e.target.value))} type="text" />
-            <button onClick={()=>putFunc(idT)}>Сохранит</button>
+          <Box style={{textAlign:"center",display:'flex',flexDirection:'column',gap:'5px'}} sx={style}>
+            <input style={{border:"1px solid black"}} value={name} onChange={((e)=>setName(e.target.value))} type="text" />
+            <input style={{border:"1px solid black"}} value={price} onChange={((e)=>setPrice(e.target.value))} type="text" />
+            <input style={{border:"1px solid black"}} value={url} onChange={((e)=>setUrl(e.target.value))} type="text" />
+            {/* <button >Сохранит</button> */}
+            <button onClick={()=>putFunc(idT)} type="button" style={{padding:'5px 0'}} className="focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900">Сохранит</button>
           </Box>
         </Modal>
       </div>

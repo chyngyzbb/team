@@ -31,21 +31,24 @@ const AddProduct = () => {
     <div className={styles.root}>
       <form onSubmit={(e) => handleSubmit(e)}>
         <input
+        style={{border:'1px solid black', color:'white'}}
           onChange={(e) => setName(e.target.value)}
           type="text"
           placeholder="Названия"
         />
         <input
+        style={{border:'1px solid black', color:'white'}}
           onChange={(e) => setPrice(e.target.value)}
           type="text"
           placeholder="Цена"
         />
         <input
+        style={{border:'1px solid black', color:'white'}}
           onChange={(e) => setImage(e.target.value)}
           type="text"
           placeholder="URL картины"
         />
-        <button type="submit">add</button>
+        <button type="submit">Добавит</button>
       </form>
     </div>
   );

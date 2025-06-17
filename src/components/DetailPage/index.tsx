@@ -11,7 +11,7 @@ const DetailPage = () => {
     
     return (
         <div className='container'>
-            <h2>{user}</h2>
+            <h1>Все товары от: <span style={{color:'blue'}}>{user}</span></h1>
             <div className={styles.root} >
                {state.map((el,idx)=>el.user===user?(
                 <ProductCard el={el} idx={idx}/>

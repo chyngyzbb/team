@@ -24,10 +24,16 @@ const basketSlice=createSlice({
             // console.log(action.payload);            
             state.basket.push(action.payload)
             saveToLocalStorage('basket',state.basket)
+        },
+        removeBasket(state,action:PayloadAction<string>){
+            console.log("storeBasket:",action.payload);
+            
+            state.basket=state.basket.filter((el)=>el._id!==action.payload)
+            saveToLocalStorage('basket',state.basket)
         }
     }
 
 })
 
-export const {setBasket}=basketSlice.actions
+export const {setBasket,removeBasket}=basketSlice.actions
 export default basketSlice.reducer

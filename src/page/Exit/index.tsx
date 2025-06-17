@@ -19,13 +19,14 @@ const Exit = () => {
     dispatch(setError(null));
     try {
       if (isregister) {
+           console.log('register');
         const res = await register(email, password);
         dispatch(setUser(res.user.email));
         navigate("/home");
         // console.log(res);
       } else {
+           console.log('login');
         const res = await login(email, password);
-        //    console.log(res);
         dispatch(setUser(res.user.email));
         navigate("/home");
       }
@@ -58,11 +59,11 @@ const Exit = () => {
         <button type="submit">{isregister ? "Катталуу" : "Логин"}</button>
       </form> */}
 
-      <form className="max-w-sm mx-auto"
+      <form onSubmit={handleSubmit} className="max-w-sm mx-auto"
       style={{textAlign:"center",background:'black',padding:"20px 50px", borderRadius:'5px'}}>
         <div className="mb-5">
           <label
-            for="email"
+            htmlFor="email"
             className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
           >
            email
@@ -78,7 +79,7 @@ const Exit = () => {
         </div>
         <div className="mb-5">
           <label
-            for="password"
+            htmlFor="password"
             className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
           >
           password
@@ -91,9 +92,9 @@ const Exit = () => {
             required
           />
         </div>
-        <div className="mb-5">
+        {/* <div className="mb-5">
           <label
-            for="repeat-password"
+            htmlFor="repeat-password"
             className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
           >
            img URL
@@ -104,13 +105,13 @@ const Exit = () => {
             className="shadow-xs bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-xs-light"
             required
           />
-        </div>
+        </div> */}
         <div className="flex items-start mb-5">
           <div className="flex items-center h-5">
           
           </div>
           <label
-            for="terms"
+            htmlFor="terms"
             className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
           >
           </label>
