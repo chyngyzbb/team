@@ -2,29 +2,42 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./AddProduct.module.scss";
 import { createProduct } from "../../api/api";
-import { RootState } from "../../store/store";
+import { AppDispatch, RootState } from "../../store/store";
+import { NewProduct } from "../../api/api";
 
 const AddProduct = () => {
 
   const user = useSelector((state: RootState) => state.auth.user);
-  const dispatch = useDispatch();
-  const [name, setName] = useState();
-  const [price, setPrice] = useState();
-  const [image, setImage] = useState();
+  const dispatch:AppDispatch = useDispatch();
+  const [name, setName] = useState('');
+  const [price, setPrice] = useState('');
+  const [image, setImage] = useState('');
 
   console.log(user);
   
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    const newProduct = {
-      name,
+    if (user !== null) {
+
+  const newProduct: NewProduct = {
+       name,
       price,
       image,
-      user
-    };
-    console.log(newProduct);
-
+      user,
+      client:[]
+  };
     dispatch(createProduct(newProduct));
+
+}
+    // const newProduct = {
+    //   name,
+    //   price,
+    //   image,
+    //   user,
+    //   client:[]
+    // };
+    // console.log(newProduct);
+
   }
 
   return (

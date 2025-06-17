@@ -1,4 +1,3 @@
-import React from "react";
 import "./Kontakty.css";
 
 function Contacts() {

@@ -1,13 +1,13 @@
-import * as React from "react";
-import ImageList from "@mui/material/ImageList";
+// import * as React from "react";
+// import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 import ImageListItemBar from "@mui/material/ImageListItemBar";
-import ListSubheader from "@mui/material/ListSubheader";
+// import ListSubheader from "@mui/material/ListSubheader";
 import IconButton from "@mui/material/IconButton";
 import InfoIcon from "@mui/icons-material/Info";
-import { styled } from "@mui/material";
+// import { styled } from "@mui/material";
 import styles from "./Category.module.scss";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 export default function Category() {
   // const navigate =useNavigate()

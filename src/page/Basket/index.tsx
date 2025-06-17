@@ -5,19 +5,20 @@ import ListItem from "@mui/material/ListItem";
 import Divider from "@mui/material/Divider";
 import ListItemText from "@mui/material/ListItemText";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
-import Avatar from "@mui/material/Avatar";  
+// import Avatar from "@mui/material/Avatar";  
 import Typography from "@mui/material/Typography";
 import { useDispatch, useSelector } from "react-redux";
 import { Button} from "@mui/material";
-import { updateProduct } from "../../api/api";
-import { saveToLocalStorage } from "../../localStorage";
-import { removeBasket, setBasket } from "../../store/slice/basketSlice";
+import { Product, updateProduct } from "../../api/api";
+// import { saveToLocalStorage } from "../../localStorage";
+import { removeBasket} from "../../store/slice/basketSlice";
+import { AppDispatch, RootState } from "../../store/store";
 
 export default function Basket() {
-  const state = useSelector((state) => state.basket.basket);
-  const product = useSelector((state) => state.product.products);
-  const user = useSelector((state) => state.auth.user);
-  const dispatch=useDispatch()
+  const state = useSelector((state:RootState) => state.basket.basket);
+  const product = useSelector((state:RootState) => state.product.products);
+  const user = useSelector((state:RootState) => state.auth.user);
+  const dispatch:AppDispatch=useDispatch()
 
   console.log(product);
 
@@ -50,15 +51,15 @@ export default function Basket() {
 
 // };
 
-function orderFunc(el) {
+function orderFunc(el:Product) {
   
   
   // let newClientArray = [...el.client,user]
   // newClientArray.push(user)
 // el.client?el.client.push(user):''
 
-
-  let newPro = {
+if (el.user !== null && user !== null){
+   const newPro:Product  = {
     name: el.name,
     price: el.price,
     image: el.image,
@@ -66,14 +67,17 @@ function orderFunc(el) {
     user: el.user,
     client: [...el.client,user], // массив менен
   };
+  dispatch(updateProduct( newPro ));
 
+
+}
+ 
   // const newLoc = state.filter((loc) => loc !== el ? el : '');
 
   // newLoc.push(newPro);
-  dispatch(updateProduct({ _id: el._id, newPro }));
 
   // console.log(state);
-  console.log(newPro);
+  // console.log(newPro);
   // console.log(newLoc);
   // console.log(newClientArray);
   console.log(el.client);
@@ -82,7 +86,7 @@ function orderFunc(el) {
 
 
 
-    function removeFunc(el){
+    function removeFunc(el:Product){
 console.log(el);
       dispatch(removeBasket(el._id))
 
@@ -91,7 +95,7 @@ console.log(el);
     <div className="container">
       <List sx={{ width: "100vw", padding: "50px 0" }}>
         <h3>Карзина</h3>
-        {state.map((el,idx) => (
+        {state.map((el:Product,idx:number) => (
           <div key={idx}>
             <ListItem
               sx={{  bgcolor: "background.paper", display:'flex',justifyContent:'space-between',gap:'20px' }}

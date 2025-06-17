@@ -1,4 +1,3 @@
-import React from "react";
 import "./Vakansii.css";
 
 function Vakansii() {

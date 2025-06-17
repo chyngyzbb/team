@@ -1,6 +1,11 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { createProduct, deleteProduct, fetchProducts, Product, updateProduct } from "../../api/api";
 
+interface ProductState {
+  products: Product[];
+  loading: boolean;
+  error: string | null;
+}
 
 
 const initialState: ProductState = {
@@ -36,11 +41,11 @@ const productSlice = createSlice({
     });
        // DELETE
     builder.addCase(deleteProduct.fulfilled, (state, action) => {
-      state.products = state.products.filter(p => p.id !== action.payload);
+      state.products = state.products.filter((p:Product) => p._id !== action.payload);
     });
     // PUT
     builder.addCase(updateProduct.fulfilled, (state, action) => {
-      const index = state.products.findIndex(p => p.id === action.payload.id);
+      const index = state.products.findIndex((p:Product) => p._id === action.payload._id);
       if (index !== -1) state.products[index] = action.payload;
     });
   },

@@ -15,38 +15,46 @@ import { MdOutlineMessage } from "react-icons/md";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import axios from "axios";
+import { AppDispatch, RootState } from "../../store/store";
+import { Product } from "../../api/api";
 
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 4,
-};
+// const style = {
+//   position: "absolute",
+//   top: "50%",
+//   left: "50%",
+//   transform: "translate(-50%, -50%)",
+//   width: 400,
+//   bgcolor: "background.paper",
+//   border: "2px solid #000",
+//   boxShadow: 24,
+//   p: 4,
+// };
 
-const ProductCard = ({ el, idx }) => {
+interface PropsType{
+  el:Product,
+  idx:number
+}
+
+
+const ProductCard = ({el,idx}:PropsType) => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const state = useSelector((state) => state.basket.basket);
+  const dispatch:AppDispatch = useDispatch();
+  // const state = useSelector((state:RootState) => state.basket.basket);
   const api = "https://680dcc8ec47cb8074d913800.mockapi.io/message";
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const [value, setValue] = useState("");
   // const [second, setSecond] = useState("");
-  const user = useSelector((state) => state.auth.user);
+  const user = useSelector((state:RootState) => state.auth.user);
 
 
-  let time = new Date().getHours();
-  let time2 = new Date().getMinutes();
-  let time3 = new Date().getSeconds();
-  let time4 = new Date().getDate();
-  let time5 = new Date().getMonth();
-  let time6 = new Date().getFullYear();
+  const time = new Date().getHours();
+  const time2 = new Date().getMinutes();
+  const time3 = new Date().getSeconds();
+  const time4 = new Date().getDate();
+  const time5 = new Date().getMonth();
+  const time6 = new Date().getFullYear();
 
   const dat = `${time6}.${time5}.${time4} _ ${time3}:${time2}:${time}`;
 
@@ -66,8 +74,8 @@ const ProductCard = ({ el, idx }) => {
   // console.log(newMessage);
   // console.log();
 
-  function addBasket(el) {
-    dispatch(setBasket(el));
+  function addBasket(props:Product) {
+    dispatch(setBasket(props));
     // console.log(el);
     // arr.push(el)
     //  getBasketLocalStorage('basket',el)
@@ -75,7 +83,7 @@ const ProductCard = ({ el, idx }) => {
     // getBasketLocalStorage('basket')
   }
 
-  function openModal(el) {
+  function openModal() {
     handleOpen();
   }
 
@@ -100,7 +108,7 @@ const ProductCard = ({ el, idx }) => {
             }}
           >
             <div>
-              <label for="chat" className="sr-only">
+              <label htmlFor="chat" className="sr-only">
                 Your message
               </label>
               <div
@@ -164,7 +172,7 @@ const ProductCard = ({ el, idx }) => {
                   onChange={(e) => setValue(e.target.value)}
                   style={{ padding: "10px 10px", width: "700px" }}
                   id="chat"
-                  rows="1"
+                  rows={1}
                   className="block mx-4 p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="Your message..."
                 ></textarea>
@@ -216,7 +224,7 @@ const ProductCard = ({ el, idx }) => {
             Заказат
           </Button>
           <MdOutlineMessage
-            onClick={() => openModal(el)}
+            onClick={() => openModal()}
             style={{ fontSize: "30px", color: "green" }}
           />
         </CardActions>

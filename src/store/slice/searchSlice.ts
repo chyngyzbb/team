@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
 
 interface SearchState{
-    search:string|null,
+    search:string,
     loading:boolean,
     error:null|string
 }

@@ -41,7 +41,7 @@ import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import { useSelector } from "react-redux";
-import styles from "./Favorite.module.scss";
+// import styles from "./Favorite.module.scss";
 import { useNavigate } from "react-router-dom";
 import * as React from "react";
 import Box from "@mui/material/Box";
@@ -49,6 +49,7 @@ import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
 import { TextField } from "@mui/material";
 import axios from "axios";
+import { RootState } from "../../store/store";
 
 const style = {
   position: "absolute",
@@ -66,8 +67,8 @@ export default function Favorite() {
   const navigate = useNavigate();
   const [message,setMessage]=React.useState('')
   const [userMessage,setUserMessage]=React.useState('')
-  const user = useSelector((state) => state.product.products);
-  const sender = useSelector((state) => state.auth.user);
+  const user = useSelector((state:RootState) => state.product.products);
+  const sender = useSelector((state:RootState) => state.auth.user);
 
   const api='https://680dcc8ec47cb8074d913800.mockapi.io/message'
 
@@ -83,7 +84,7 @@ export default function Favorite() {
   // });
 
   const [open, setOpen] = React.useState(false);
-  const handleOpen = (el) =>{ 
+  const handleOpen = (el:string) =>{ 
     setUserMessage(el)
     setOpen(true);}
   const handleClose = () => setOpen(false);
@@ -142,7 +143,7 @@ const dat=`${time6}.${time5}.${time4} _ ${time3}:${time2}:${time}`
         </Modal>
       </div>
       <List sx={{ width: "100wh", padding: "50px 0" }}>
-        {res.map((el, idx) => (
+        {res.map((el) => (
           // <li onClick={() => navigate(`/detail-page/${el}`)}>
           //   {idx + 1}.{el}
           // </li>

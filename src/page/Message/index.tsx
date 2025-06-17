@@ -2,30 +2,33 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
+// import Button from "@mui/material/Button";
+// import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import styles from "./Message.module.scss";
 import { TiMessage } from "react-icons/ti";
-import { MdOutlineMessage, MdPadding } from "react-icons/md";
+import { MdOutlineMessage } from "react-icons/md";
+import { MessageType } from "../../Types/types";
+import { RootState } from "../../store/store";
 
 
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 4,
-};
+
+// const style = {
+//   position: "absolute",
+//   top: "50%",
+//   left: "50%",
+//   transform: "translate(-50%, -50%)",
+//   width: 400,
+//   bgcolor: "background.paper",
+//   border: "2px solid #000",
+//   boxShadow: 24,
+//   p: 4,
+// };
 
 const Message = () => {
   const api = "https://680dcc8ec47cb8074d913800.mockapi.io/message";
   const [message, setMessage] = useState([]);
-  const user = useSelector((state) => state.auth.user);
+  const user = useSelector((state:RootState) => state.auth.user);
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -67,11 +70,11 @@ const Message = () => {
     const res = await axios.get(api);
     setMessage(res.data);
   }
-  const myMessage = message.filter((el) => el.recipient === user||el.sender===user);
-  const myDialog = myMessage.filter((el) => el.sender === dialog && el.recipient===user ||el.sender===user && el.recipient===dialog);
+  const myMessage = message.filter((el:MessageType) => el.recipient === user||el.sender===user);
+  const myDialog = myMessage.filter((el:MessageType) => el.sender === dialog && el.recipient===user ||el.sender===user && el.recipient===dialog);
   
-  const res=myMessage.map((el)=>el.sender)
-  const res2=myMessage.map((el)=>el.recipient)
+  const res=myMessage.map((el:MessageType)=>el.sender)
+  const res2=myMessage.map((el:MessageType)=>el.recipient)
   const res3=[...res,...res2]
   const userMessage=[...new Set(res3)]
   console.log(res);
@@ -117,7 +120,7 @@ const Message = () => {
             >
               <div>
 
-                <label for="chat" className="sr-only">
+                <label htmlFor="chat" className="sr-only">
                   Your message
 
                 </label>
@@ -182,7 +185,7 @@ const Message = () => {
                     onChange={(e) => setValue(e.target.value)}
                     style={{ padding: "10px 10px",width:'700px'}}
                     id="chat"
-                    rows="1"
+                    rows={1}
                     className="block mx-4 p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder='Your message...'
                   ></textarea>
@@ -270,13 +273,13 @@ const Message = () => {
             //   background:'blue'
             }}
           >
-            {myDialog.map((el) => (
+            {myDialog.map((el:MessageType) => (
               <div
               style={{
                 display:'flex',
-                flexDirection:`${el.sender===user?'row-reverse':''}`,
-                marginLeft:`${el.sender===user?"200px":''}`,
-                textAlign:`${el.sender===user?"end":''}`
+                flexDirection:`${el.sender===user?'row-reverse':'row'}`,
+                marginLeft:`${el.sender===user?"200px":'0'}`,
+                textAlign:`${el.sender===user?"end":'start'}`
             }}
               className="flex items-start gap-2.5">
                 <img

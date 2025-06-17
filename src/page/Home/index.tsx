@@ -1,25 +1,25 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchProducts } from "../../api/api";
-import { RootState } from "../../store/store";
-import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
+import { fetchProducts, Product } from "../../api/api";
+import { AppDispatch, RootState } from "../../store/store";
+// import Card from "@mui/material/Card";
+// import CardActions from "@mui/material/CardActions";
+// import CardContent from "@mui/material/CardContent";
+// import CardMedia from "@mui/material/CardMedia";
+// import Button from "@mui/material/Button";
+// import Typography from "@mui/material/Typography";
 import styles from "./Home.module.scss";
-import Stack from "@mui/material/Stack";
+// import Stack from "@mui/material/Stack";
 import ProductCard from "../../components/ProductCard";
 
 const Home: React.FC = () => {
-  const dispatch = useDispatch();
-  const search =useSelector((state)=>state.search.search)
+  const dispatch:AppDispatch = useDispatch();
+  const search =useSelector((state:RootState)=>state.search.search)
   const { error, loading, products } = useSelector(
     (state: RootState) => state.product
   );
 
-  const res = products.length>1?products.filter((el) => (el.name.toLowerCase().includes(search.toLowerCase()))):''
+  const res = products.length>1?products.filter((el) => (el.name.toLowerCase().includes(search.toLowerCase()))):[]
   console.log(search);
   console.log(res);
   console.log(products);
@@ -43,8 +43,8 @@ const Home: React.FC = () => {
       <h3>Общие карточки: {res.length}шт</h3>
       <div className={styles.root}>
         {products && products.length > 0 ? (
-          res.map((el, idx) => (
-            <ProductCard el={el} key={idx} />
+          res.map((el:Product, idx:number) => (
+            <ProductCard el={el} idx={idx} key={idx} />
             // <Card key={idx} sx={{ maxWidth: 305 }}>
             //   <CardMedia
             //     sx={{ height: 140 }}

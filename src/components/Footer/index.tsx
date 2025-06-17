@@ -1,4 +1,3 @@
-import React from "react";
 import AdbIcon from "@mui/icons-material/Adb";
 import { NavLink } from "react-router-dom";
 import styles from "./Footer.module.scss";

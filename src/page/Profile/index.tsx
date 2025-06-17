@@ -3,9 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { setError, setLoading, setUser } from "../../store/slice/authSlice";
 import { login, register } from "../../services/authService";
 import { useNavigate } from "react-router-dom";
+import { RootState } from "../../store/store";
 
 const Profile = () => {
-  const user=useSelector((state)=>state.auth.user)
+  const user=useSelector((state:RootState)=>state.auth.user)
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
@@ -32,8 +33,14 @@ const Profile = () => {
         dispatch(setUser(res.user.email));
         navigate("/home");
       }
-    } catch (err: any) {
-      dispatch(setError(err.message));
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+    console.error("Error message:", error.message);
+    dispatch(setError(error.message));
+  } else {
+    console.error("Unknown error:", error);
+  }
+      
     }
   };
 
