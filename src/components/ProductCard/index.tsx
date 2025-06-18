@@ -221,7 +221,7 @@ const ProductCard = ({el,idx}:PropsType) => {
             В карзину
           </Button>
           <Button variant="contained" color="success">
-            Заказат
+            Заказать
           </Button>
           <MdOutlineMessage
             onClick={() => openModal()}

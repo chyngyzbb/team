@@ -23,13 +23,13 @@ import { RootState } from "../../store/store";
 import { setSearch } from "../../store/slice/searchSlice";
 // import Button from '@mui/material/Button';
 
-const pages = ["Все", "Ползовательи", "Заказы", "Карзина", "Категория"];
+const pages = ["Все", "Ползователь", "AI", "Карзина", "Категория"];
 const settings = [
-  "Профил",
+  "Профиль",
   "Мои продукты",
-  "Добавит продукт",
+  "Добавить продукт",
   "Сообщения",
-  "Выйти аккаунта"
+  "Выйти из  аккаунта"
 ];
 
 function Header() {
@@ -178,7 +178,7 @@ function exit(){
                         : idx === 1
                         ? "/favorite"
                         : idx === 2
-                        ? "/order"
+                        ? "/ai"
                         : idx === 3
                         ? "/basket"
                         : idx === 4

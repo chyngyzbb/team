@@ -4,7 +4,6 @@ import Home from "./page/Home";
 // import Footer from "./components/Footer";
 import Basket from "./page/Basket";
 import Favorite from "./page/Favorite";
-import Order from "./page/Order";
 import Profile from "./page/Profile";
 import AddProduct from "./page/AddProduct";
 import MyProduct from "./page/MyProduct";
@@ -16,6 +15,7 @@ import Vakansii from "./page/Vakansii";
 import DetailPage from "./components/DetailPage";
 import Message from "./page/Message";
 import 'flowbite';
+import SearchAI from "./page/SearchAI";
 
 
 
@@ -26,7 +26,7 @@ function App() {
             <Route path="/home" element={<Home />} />
             <Route path="/basket" element={<Basket />} />
             <Route path="/favorite" element={<Favorite />} />
-            <Route path="/order" element={<Order />} />
+            <Route path="/ai" element={<SearchAI />} />
             <Route path="/category" element={<Category />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/add-product" element={<AddProduct />} />

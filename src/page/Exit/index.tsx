@@ -50,9 +50,9 @@ const Exit = () => {
           style={{ padding: "10px" }}
           onClick={() => setIsregister(!isregister)}
         >
-          Изменит
+          Изменить
         </button>
-        <h1>{isregister ? "Через регистрация" : "Через логин"}</h1>
+        <h1>{isregister ? "Регистрация" : "Через логин"}</h1>
 
         <form
           onSubmit={handleSubmit}
