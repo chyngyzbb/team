@@ -1,16 +1,12 @@
-// import * as React from "react";
-// import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 import ImageListItemBar from "@mui/material/ImageListItemBar";
-// import ListSubheader from "@mui/material/ListSubheader";
 import IconButton from "@mui/material/IconButton";
 import InfoIcon from "@mui/icons-material/Info";
-// import { styled } from "@mui/material";
 import styles from "./Category.module.scss";
-// import { useNavigate } from "react-router-dom";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
 
 export default function Category() {
-  // const navigate =useNavigate()
   const itemData = [
     {
       img: "https://kuzov-media.ru/upload/iblock/b64/vtcp45wgg1zjuuriy0b42b8jkhmrb43m.jpg",
@@ -82,65 +78,69 @@ export default function Category() {
       title: "Bike",
       author: "@southside_customs",
       cols: 2,
-    }, {
-    img: 'https://images.unsplash.com/photo-1597645587822-e99fa5d45d25',
-    title: 'Mushrooms',
-    author: '@silverdalex',
-    rows: 2,
-    cols: 2,
-  },
-  {
-    img: 'https://images.unsplash.com/photo-1567306301408-9b74779a11af',
-    title: 'Tomato basil',
-    author: '@shelleypauls',
-  },
-  {
-    img: 'https://images.unsplash.com/photo-1471357674240-e1a485acb3e1',
-    title: 'Sea star',
-    author: '@peterlaster',
-  },
-  {
-    img: 'https://images.unsplash.com/photo-1589118949245-7d38baf380d6',
-    title: 'Bike',
-    author: '@southside_customs',
-    cols: 2,
-  },
+    },
+    {
+      img: "https://images.unsplash.com/photo-1597645587822-e99fa5d45d25",
+      title: "Mushrooms",
+      author: "@silverdalex",
+      rows: 2,
+      cols: 2,
+    },
+    {
+      img: "https://images.unsplash.com/photo-1567306301408-9b74779a11af",
+      title: "Tomato basil",
+      author: "@shelleypauls",
+    },
+    {
+      img: "https://images.unsplash.com/photo-1471357674240-e1a485acb3e1",
+      title: "Sea star",
+      author: "@peterlaster",
+    },
+    {
+      img: "https://images.unsplash.com/photo-1589118949245-7d38baf380d6",
+      title: "Bike",
+      author: "@southside_customs",
+      cols: 2,
+    },
   ];
 
   return (
-    <div className="container">
+    <>
+      <Header />
+      <div className="container">
         <h1 className={styles.title}>Категория</h1>
-      <div className={styles.category}>
-        
-        {itemData.map((item) => (
-          <ImageListItem
-            key={item.img}
-            style={{ width: "240px", height: "140px",borderRadius:'10px' }}
-          >
-            <img
-            // onClick={()=>navigate('/basket')}
-              srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 3x`}
-              src={`${item.img}?w=248&fit=crop&auto=format`}
-              alt={item.title}
-              loading="lazy"
-            />
-            <ImageListItemBar
-            style={{height:"42px"}}
-              title={item.title}
-              subtitle={item.author}
-              actionIcon={
-                <IconButton
-                // style={{height:'-4px',padding:"-10px"}}
-                  sx={{ color: "rgba(255, 255, 255, 0.54)" }}
-                  aria-label={`info about ${item.title}`}
-                >
-                  <InfoIcon />
-                </IconButton>
-              }
-            />
-          </ImageListItem>
-        ))}
+        <div className={styles.category}>
+          {itemData.map((item) => (
+            <ImageListItem
+              key={item.img}
+              style={{ width: "240px", height: "140px", borderRadius: "10px" }}
+            >
+              <img
+                // onClick={()=>navigate('/basket')}
+                srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 3x`}
+                src={`${item.img}?w=248&fit=crop&auto=format`}
+                alt={item.title}
+                loading="lazy"
+              />
+              <ImageListItemBar
+                style={{ height: "42px" }}
+                title={item.title}
+                subtitle={item.author}
+                actionIcon={
+                  <IconButton
+                    // style={{height:'-4px',padding:"-10px"}}
+                    sx={{ color: "rgba(255, 255, 255, 0.54)" }}
+                    aria-label={`info about ${item.title}`}
+                  >
+                    <InfoIcon />
+                  </IconButton>
+                }
+              />
+            </ImageListItem>
+          ))}
+        </div>
       </div>
-    </div>
+      <Footer />
+    </>
   );
 }
