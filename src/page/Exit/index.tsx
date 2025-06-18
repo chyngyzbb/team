@@ -50,9 +50,9 @@ const Exit = () => {
           style={{ padding: "10px" }}
           onClick={() => setIsregister(!isregister)}
         >
-          Алмаштыруу
+          Изменит
         </button>
-        <h1>{isregister ? "Register" : "Login"}</h1>
+        <h1>{isregister ? "Через регистрация" : "Через логин"}</h1>
 
         <form
           onSubmit={handleSubmit}
@@ -106,9 +106,9 @@ const Exit = () => {
           <button
             type="submit"
             style={{ padding: "4px 10px" }}
-            className="text-white  bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            className="text-white  bg-green-700 hover:bg-green-800  focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 "
           >
-            {isregister ? "Register" : "Login"}
+            {isregister ? "Регистрация" : "Логин"}
           </button>
         </form>
       </div>
