@@ -4,8 +4,7 @@ import { setError, setLoading, setUser } from "../../store/slice/authSlice";
 import { login, register } from "../../services/authService";
 import { useNavigate } from "react-router-dom";
 import styles from "./Exit.module.scss";
-import Header from "../../components/Header";
-import Footer from "../../components/Footer";
+
 
 const Exit = () => {
   const dispatch = useDispatch();
