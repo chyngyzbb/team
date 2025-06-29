@@ -49,20 +49,28 @@ const ProductCard = ({el,idx}:PropsType) => {
   const user = useSelector((state:RootState) => state.auth.user);
 
 
-  const time = new Date().getHours();
-  const time2 = new Date().getMinutes();
-  const time3 = new Date().getSeconds();
-  const time4 = new Date().getDate();
-  const time5 = new Date().getMonth();
-  const time6 = new Date().getFullYear();
+  // const time = new Date().getHours();
+  // const time2 = new Date().getMinutes();
+  // const time3 = new Date().getSeconds();
+  // const time4 = new Date().getDate();
+  // const time5 = new Date().getMonth();
+  // const time6 = new Date().getFullYear();
 
-  const dat = `${time6}.${time5}.${time4} _ ${time3}:${time2}:${time}`;
+  // const dat = `${time6}.${time5}.${time4} _ ${time3}:${time2}:${time}`;
+  const a = new Date();
 
   const newMessage = {
     recipient: el.user,
     message: value,
     sender: user,
-    date: dat,
+    date: a,
+    settings: {
+      visibility: false,
+      delete: false,
+      edit: false,
+      copy: false,
+      reading: false,
+    },
   };
   async function sendMessage() {
     // console.log(newMessage);

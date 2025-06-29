@@ -1,6 +1,7 @@
 // store/slices/productSlice.ts
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { MessageType, MessageTypeId } from "../Types/types";
 
 // const API_URL='https://api-crud.elcho.dev/api/v1/d7f73-daf9b-15876/products'
 const API_URL2 = "https://6765634852b2a7619f5f643f.mockapi.io/redux";
@@ -17,49 +18,22 @@ export interface NewProduct {
   client: string[];
 }
 
-// interface ProductState {
-//   products: Product[];
-//   loading: boolean;
-//   error: string | null;
-// }
-
-// 🟩 Async thunk
-// export const fetchProducts = createAsyncThunk<Product[]>(
-//   "products/fetchProducts",
-//   async (_, { rejectWithValue }) => {
-//     try {
-//       const response = await axios.get<Product[]>(API_URL2);
-//       return response.data;
-//     } catch (error) {
-//       if (error instanceof Error) {
-//         console.error("Error message:", error.message);
-//         return rejectWithValue(error.message);
-//       } else {
-//         console.error("Unknown error:", error);
-//       }
-//     }
-//   }
-// );
-
 export const fetchProducts = createAsyncThunk<
-  Product[],  // Возвращаемый тип в случае success
-  void,       // Тип аргументов (payload для вызова thunk)
-  { rejectValue: string } // Тип значения для rejectWithValue
->(
-  "products/fetchProducts",
-  async (_, { rejectWithValue }) => {
-    try {
-      const response = await axios.get<Product[]>(API_URL2);
-      return response.data;
-    } catch (error) {
-      if (error instanceof Error) {
-        return rejectWithValue(error.message);
-      } else {
-        return rejectWithValue("Unknown error");
-      }
+  Product[],
+  void,
+  { rejectValue: string }
+>("products/fetchProducts", async (_, { rejectWithValue }) => {
+  try {
+    const response = await axios.get<Product[]>(API_URL2);
+    return response.data;
+  } catch (error) {
+    if (error instanceof Error) {
+      return rejectWithValue(error.message);
+    } else {
+      return rejectWithValue("Unknown error");
     }
   }
-);
+});
 
 // 🟡 POST
 export const createProduct = createAsyncThunk(
@@ -102,3 +76,28 @@ export const updateProduct = createAsyncThunk(
 //     return res.data;
 //   }
 // );
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+//            Message
+
+
+const api = "https://680dcc8ec47cb8074d913800.mockapi.io/message";
+
+
+export const fetchMessage = createAsyncThunk("message/getMessage", async () => {
+  const res = await axios.get(api);
+  return res.data;
+});
+
+export const createMessage=createAsyncThunk("message/createMessage",
+  async (value:MessageType)=>{
+    const res= await axios.post(api,value)
+    return res.data
+  }
+)
+
+export const updateMessage=createAsyncThunk("message/updateMessage",
+  async(value:MessageTypeId)=>{
+    const res=await axios.put(`${api}/${value.id}`,{...value})
+    return res.data
+  })

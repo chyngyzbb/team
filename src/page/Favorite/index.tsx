@@ -6,7 +6,7 @@ import ListItemText from "@mui/material/ListItemText";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import * as React from "react";
 import Box from "@mui/material/Box";
@@ -14,9 +14,10 @@ import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
 import { TextField } from "@mui/material";
 import axios from "axios";
-import { RootState } from "../../store/store";
+import { AppDispatch, RootState } from "../../store/store";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
+import { fetchProducts } from "../../api/api";
 
 const style = {
   position: "absolute",
@@ -36,7 +37,7 @@ export default function Favorite() {
   const [userMessage, setUserMessage] = React.useState("");
   const user = useSelector((state: RootState) => state.product.products);
   const sender = useSelector((state: RootState) => state.auth.user);
-
+  const dispatch:AppDispatch=useDispatch()
   const api = "https://680dcc8ec47cb8074d913800.mockapi.io/message";
 
   const res1 = user.map((el) => el.user);
@@ -54,22 +55,30 @@ export default function Favorite() {
   console.log(sender);
   console.log(new Date());
 
-  const time = new Date().getHours();
-  const time2 = new Date().getMinutes();
-  const time3 = new Date().getSeconds();
-  const time4 = new Date().getDate();
-  const time5 = new Date().getMonth();
-  const time6 = new Date().getFullYear();
+  // const time = new Date().getHours();
+  // const time2 = new Date().getMinutes();
+  // const time3 = new Date().getSeconds();
+  // const time4 = new Date().getDate();
+  // const time5 = new Date().getMonth();
+  // const time6 = new Date().getFullYear();
 
   console.log();
 
-  const dat = `${time6}.${time5}.${time4} _ ${time3}:${time2}:${time}`;
+  // const dat = `${time6}.${time5}.${time4} _ ${time3}:${time2}:${time}`;
+  const a = new Date();
 
   const newMessage = {
     recipient: userMessage,
     message,
     sender,
-    date: dat,
+    date: a,
+      settings: {
+      visibility: false,
+      delete: false,
+      edit: false,
+      copy: false,
+      reading: false,
+    },
   };
   async function sendMessage() {
     console.log(newMessage);
@@ -78,6 +87,9 @@ export default function Favorite() {
     const res = await axios.post(api, newMessage);
     return res.data;
   }
+  React.useEffect(()=>{
+    dispatch(fetchProducts())
+  },[dispatch])
 
   return (
     <>

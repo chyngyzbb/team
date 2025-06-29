@@ -7,12 +7,13 @@
   box-sizing: border-box;
 }
 html{
-  /* color-scheme: dark; */
+  color-scheme: dark;
   display: table-row;
 }
 body{
   font-family: Arial, Helvetica, sans-serif;
   background: #F9F4E2;
+  /* background: #01146a49; */
   color: black;
 }
 li{

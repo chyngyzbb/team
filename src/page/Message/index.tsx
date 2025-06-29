@@ -1,6 +1,6 @@
-import axios from "axios";
+// import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Box from "@mui/material/Box";
 // import Button from "@mui/material/Button";
 // import Typography from "@mui/material/Typography";
@@ -8,10 +8,11 @@ import Modal from "@mui/material/Modal";
 import styles from "./Message.module.scss";
 import { TiMessage } from "react-icons/ti";
 import { MdOutlineMessage } from "react-icons/md";
-import { MessageType } from "../../Types/types";
-import { RootState } from "../../store/store";
+import { MessageType, MessageTypeId } from "../../Types/types";
+import { AppDispatch, RootState } from "../../store/store";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
+import { createMessage, fetchMessage, updateMessage } from "../../api/api";
 
 // const style = {
 //   position: "absolute",
@@ -26,61 +27,140 @@ import Footer from "../../components/Footer";
 // };
 
 const Message = () => {
-  const api = "https://680dcc8ec47cb8074d913800.mockapi.io/message";
-  const [message, setMessage] = useState([]);
+  // const api = "https://680dcc8ec47cb8074d913800.mockapi.io/message";
+  const [message, setMessage] = useState<MessageTypeId[]>([]);
+  const dispatch: AppDispatch = useDispatch();
   const user = useSelector((state: RootState) => state.auth.user);
+  const mess = useSelector((state: RootState) => state.message.message);
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const [sender, setSender] = useState("");
   const [value, setValue] = useState("");
   const [dialog, setDialog] = useState("");
+  const [messageSetting, setMessageSetting] = useState('');
+  // const [newMessageSettings, setNewMessageSettings] = useState(null);
 
   const time = new Date().getHours();
   const time2 = new Date().getMinutes();
   const time3 = new Date().getSeconds();
   const time4 = new Date().getDate();
-  const time5 = new Date().getMonth();
+  const time5 = new Date().getMonth() + 1;
   const time6 = new Date().getFullYear();
-
-  console.log();
-
   const dat = `${time6}.${time5}.${time4} _ ${time3}:${time2}:${time}`;
 
-  const newMessage = {
+  const a = new Date();
+  console.log(a);
+  console.log(time);
+  console.log(dat);
+
+  const newMessage:MessageType = {
     recipient: sender,
     message: value,
-    sender: user,
-    date: dat,
+    sender: user ? user : "",
+    date: a + "",
+    settings: {
+      visibility: false,
+      delete: false,
+      edit: false,
+      copy: false,
+      reading: false,
+    },
   };
+
   async function sendMessage() {
     console.log(newMessage);
     handleClose();
-
-    const res = await axios.post(api, newMessage);
-    return res.data;
+    dispatch(createMessage(newMessage));
   }
 
+  function editMessageFunc(el:MessageTypeId) {
+     const updMessage:MessageTypeId = {
+        id: el.id,
+        recipient: el.recipient,
+        message: el.message,
+        sender: el.sender,
+        date: el.date,
+        settings: {
+          visibility: el.settings.visibility,
+          delete:el.settings.delete,
+          edit: true,//el.settings.edit,
+          copy: el.settings.copy,
+          reading: el.settings.reading,
+        },
+      };
+    // const res={...newMessageSettings,settings:newMessageSettings.settings,settings.edit:true}
+    // console.log(res);
+    
+    dispatch(updateMessage(updMessage));
+        setMessageSetting('');
+
+  }
+
+  function updateMessageFunc(el:MessageTypeId) {
+     const updMessage:MessageTypeId = {
+        id: el.id,
+        recipient: el.recipient,
+        message: el.message,
+        sender: el.sender,
+        date: el.date,
+        settings: {
+          visibility: el.settings.visibility,
+          delete: true,// el.settings.delete,
+          edit: el.settings.edit,
+          copy: el.settings.copy,
+          reading: el.settings.reading,
+        },
+      };
+    // const res=newMessageSettings
+    // console.log(updMessage);
+    // handleClose();
+    dispatch(updateMessage(updMessage));
+        setMessageSetting('');
+
+  }
+  // const res = await axios.post(api, newMessage);
+  // return res.data;
   function handleOpenFunc() {
     setSender(dialog);
     handleOpen();
   }
 
   async function getMessage() {
-    const res = await axios.get(api);
-    setMessage(res.data);
+    dispatch(fetchMessage());
+    // const res = await axios.get(api);
+    setMessage(mess);
   }
+
+  function openSettingsFunc(el:MessageTypeId) {
+    if (el.sender === user) {
+     
+      // setNewMessageSettings(updMessage);
+      if (el.id === messageSetting) {
+        setMessageSetting('');
+      } else {
+        setMessageSetting(el.id);
+      }
+    }
+  }
+  //     READING логикасы жазылууда..........
+  //  const myNewMessage = message.filter(
+  //   (el: MessageType) => el.recipient === user
+  // );
+  // const myNewMessage2=myNewMessage.filter(
+  //   (el)=>el.settings.reading===false?el.sender:'')
+
   const myMessage = message.filter(
-    (el: MessageType) => el.recipient === user || el.sender === user
+    (el: MessageTypeId) => el.recipient === user || el.sender === user
   );
   const myDialog = myMessage.filter(
-    (el: MessageType) =>
+    (el: MessageTypeId) =>
       (el.sender === dialog && el.recipient === user) ||
       (el.sender === user && el.recipient === dialog)
   );
 
-  const res = myMessage.map((el: MessageType) => el.sender);
-  const res2 = myMessage.map((el: MessageType) => el.recipient);
+  const res = myMessage.map((el: MessageTypeId) => el.sender);
+  const res2 = myMessage.map((el: MessageTypeId) => el.recipient);
   const res3 = [...res, ...res2];
   const userMessage = [...new Set(res3)];
   console.log(res);
@@ -88,10 +168,14 @@ const Message = () => {
   console.log(res3);
   console.log(myMessage);
   console.log(userMessage);
+  console.log(myDialog);
 
   useEffect(() => {
+    // if(mess.length>0){
+    dispatch(fetchMessage());
     getMessage();
-  }, []);
+    // }
+  }, [dispatch, mess.length]);
 
   return (
     <>
@@ -188,6 +272,7 @@ const Message = () => {
                       <span className="sr-only">Add emoji</span>
                     </button>
                     <textarea
+                    // defaultValue={}
                       onChange={(e) => setValue(e.target.value)}
                       style={{ padding: "10px 10px", width: "700px" }}
                       id="chat"
@@ -281,7 +366,7 @@ const Message = () => {
                 //   background:'blue'
               }}
             >
-              {myDialog.map((el: MessageType) => (
+              {myDialog.map((el: MessageTypeId) => (
                 <div
                   style={{
                     display: "flex",
@@ -306,18 +391,31 @@ const Message = () => {
                       <span className="text-sm font-semibold text-gray-900 dark:text-gray-400">
                         {el.sender}
                       </span>
-                      <span className="text-sm font-normal text-gray-500 dark:text-gray-400">
+                      <span
+                        style={{ fontSize: "9px", lineHeight: "14px" }}
+                        className=" font-normal text-gray-500 dark:text-gray-400"
+                      >
                         {el.date}
                       </span>
                     </div>
                     <p className="text-sm font-normal py-2.5 text-gray-900 dark:text-white">
-                      {el.message}
+                      {el.settings.delete ? (
+                        <span style={{ color: "grey", fontSize: "12px" }}>
+                          Сообщения удальено
+                        </span>
+                      ) : (
+                       <>
+                        <p>{el.message}</p>
+                        <p style={{fontSize:'10px',color:'grey'}}>{el.settings.edit?"изменено":''}</p>
+                       </>
+                      )}
                     </p>
                     <span className="text-sm font-normal text-gray-500 dark:text-gray-400">
                       {/* Delivered */}
                     </span>
                   </div>
                   <button
+                    onClick={() => openSettingsFunc(el)}
                     id="dropdownMenuIconButton"
                     data-dropdown-toggle="dropdownDots"
                     data-dropdown-placement="bottom-start"
@@ -334,56 +432,64 @@ const Message = () => {
                       <path d="M3.5 1.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 6.041a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 5.959a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z" />
                     </svg>
                   </button>
-                  {/* <div
-                  id="dropdownDots"
-                  className="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-40 dark:bg-gray-700 dark:divide-gray-600"
-                >
-                  <ul
-                    className="py-2 text-sm text-gray-700 dark:text-gray-200"
-                    aria-labelledby="dropdownMenuIconButton"
+                  <div
+                    style={{
+                      display: `${el.id !== messageSetting ? "none" : "block"}`,
+                    }}
+                    // hidden
+                    id="dropdownDots"
+                    className="z-10  bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-40 dark:bg-gray-700 dark:divide-gray-600"
                   >
-                    <li>
-                      <a
-                        href="#"
-                        className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                      >
-                        Reply
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href="#"
-                        className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                      >
-                        Forward
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href="#"
-                        className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                      >
-                        Copy
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href="#"
-                        className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                      >
-                        Report
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href="#"
-                        className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                      >
-                        Delete
-                      </a>
-                    </li>
-                  </ul>
-                </div> */}
+                    <ul
+                      style={{ textAlign: "center",cursor:'pointer' }}
+                      className="py-2 text-sm text-gray-700 dark:text-gray-200"
+                      aria-labelledby="dropdownMenuIconButton"
+                    >
+                      <li>
+                        <a
+                          href="#"
+                          className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                        >
+                          Reply
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          onClick={() => editMessageFunc(el)}
+                          // href="#"
+                          className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                        >
+                          Edit
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          href="#"
+                          className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                        >
+                          Copy
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          href="#"
+                          className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                        >
+                          Report
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          style={{ cursor: "pointer" }}
+                          onClick={() => updateMessageFunc(el)}
+                          // href="#"
+                          className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                        >
+                          Delete
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
               ))}
               <MdOutlineMessage

@@ -7,8 +7,10 @@ const SearchAI = () => {
   const [query, setQuery] = useState("");
   const [answer, setAnswer] = useState("");
   const [loading, setLoading] = useState(false);
-  // const apiKey = import.meta.env.VITE_OPENAI_API_KEY;
 
+  
+
+  // const apiKey = import.meta.env.VITE_OPENAI_API_KEY;
 
   const fetchAnswer = async () => {
     if (!query.trim()) return;
@@ -66,7 +68,9 @@ const SearchAI = () => {
         <div className="mt-4 min-h-[100px] bg-gray-100 p-4 rounded-lg whitespace-pre-wrap">
           {loading ? "Жүктөлүүдө..." : answer || "Жооп бул жерге чыгат"}
         </div>
+    
       </div>
+
       <Footer />
     </>
   );

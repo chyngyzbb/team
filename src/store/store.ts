@@ -3,6 +3,7 @@ import authReducer from './slice/authSlice'
 import productReducer from './slice/productSlice'
 import basketReducer from './slice/basketSlice'
 import searchReducer from './slice/searchSlice'
+import messageReducer from './slice/messageSlice'
 
 
 
@@ -11,7 +12,8 @@ export const store=configureStore({
         auth:authReducer,
         product:productReducer,
         basket:basketReducer,
-        search:searchReducer
+        search:searchReducer,
+        message:messageReducer
     }
 })
 
