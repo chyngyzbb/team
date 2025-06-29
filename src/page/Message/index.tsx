@@ -170,6 +170,7 @@ const Message = () => {
   console.log(userMessage);
   console.log(myDialog);
 
+  
   useEffect(() => {
     // if(mess.length>0){
     dispatch(fetchMessage());

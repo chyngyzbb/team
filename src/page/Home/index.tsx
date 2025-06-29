@@ -1,11 +1,12 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchProducts, Product } from "../../api/api";
+import { fetchProducts } from "../../api/api";
 import { AppDispatch, RootState } from "../../store/store";
 import styles from "./Home.module.scss";
 import ProductCard from "../../components/ProductCard";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
+import { Product } from "../../Types/types";
 
 const Home: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();

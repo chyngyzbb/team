@@ -1,12 +1,10 @@
  
  export interface MessageType{
-   // id: string
      message: string,
     date: string,
     recipient: string,
     sender: string,
     settings:SettingsType
-    // id: string
  }
 
  export interface MessageTypeId extends MessageType{
@@ -21,3 +19,15 @@
     edit:boolean,
     reading:boolean
  }
+
+ export interface Product extends NewProduct {
+  _id: string;
+}
+
+export interface NewProduct {
+  name: string;
+  price: string;
+  image: string;
+  user: string;
+  client: string[];
+}

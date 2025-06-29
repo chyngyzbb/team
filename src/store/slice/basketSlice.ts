@@ -7,8 +7,8 @@
 // }
  
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { Product } from "../../api/api"
 import { getBasketLocalStorage, saveToLocalStorage } from "../../localStorage"
+import { Product } from "../../Types/types"
 
 const initialState={
     basket:getBasketLocalStorage('basket'),

@@ -7,11 +7,12 @@ import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Typography from "@mui/material/Typography";
 import { useDispatch, useSelector } from "react-redux";
 import { Button } from "@mui/material";
-import { Product, updateProduct } from "../../api/api";
+import {  updateProduct } from "../../api/api";
 import { removeBasket } from "../../store/slice/basketSlice";
 import { AppDispatch, RootState } from "../../store/store";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
+import { Product } from "../../Types/types";
 
 export default function Basket() {
   const state = useSelector((state: RootState) => state.basket.basket);

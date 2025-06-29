@@ -4,9 +4,9 @@ import { useParams } from "react-router-dom";
 import ProductCard from "../ProductCard";
 import styles from "./Detail.module.scss";
 import { RootState } from "../../store/store";
-import { Product } from "../../api/api";
 import Header from "../Header";
 import Footer from "../Footer";
+import { Product } from "../../Types/types";
 
 const DetailPage = () => {
   const { user } = useParams();

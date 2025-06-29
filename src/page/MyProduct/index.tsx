@@ -11,9 +11,9 @@ import Typography from "@mui/material/Typography";
 import styles from "./MyProduct.module.scss";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
-import { Product } from "../../api/api";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
+import { Product } from "../../Types/types";
 
 const MyProduct: React.FC = () => {
   const [name, setName] = useState("");

@@ -16,7 +16,7 @@ import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import axios from "axios";
 import { AppDispatch, RootState } from "../../store/store";
-import { Product } from "../../api/api";
+import { Product } from "../../Types/types";
 
 // const style = {
 //   position: "absolute",

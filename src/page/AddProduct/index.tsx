@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import styles from "./AddProduct.module.scss";
 import { createProduct } from "../../api/api";
 import { AppDispatch, RootState } from "../../store/store";
-import { NewProduct } from "../../api/api";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
+import { NewProduct } from "../../Types/types";
 
 const AddProduct = () => {
   const user = useSelector((state: RootState) => state.auth.user);

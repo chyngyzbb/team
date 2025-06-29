@@ -1,22 +1,12 @@
 // store/slices/productSlice.ts
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { MessageType, MessageTypeId } from "../Types/types";
+import { MessageType, MessageTypeId, NewProduct, Product } from "../Types/types";
 
 // const API_URL='https://api-crud.elcho.dev/api/v1/d7f73-daf9b-15876/products'
 const API_URL2 = "https://6765634852b2a7619f5f643f.mockapi.io/redux";
 
-export interface Product extends NewProduct {
-  _id: string;
-}
 
-export interface NewProduct {
-  name: string;
-  price: string;
-  image: string;
-  user: string;
-  client: string[];
-}
 
 export const fetchProducts = createAsyncThunk<
   Product[],
