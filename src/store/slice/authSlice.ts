@@ -1,14 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type {  PayloadAction } from "@reduxjs/toolkit";
 import { getLocalStorage, saveToLocalStorage } from "../../localStorage";
+import { AuthState } from "../../Types/types";
 
 
 
-interface AuthState{
-    user:null|string,
-    loading:boolean,
-    error:null|string
-}
+
 
 const initialState:AuthState={
     user:getLocalStorage('user'),

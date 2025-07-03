@@ -1,11 +1,12 @@
 // store/slices/productSlice.ts
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { MessageType, MessageTypeId, NewProduct, Product } from "../Types/types";
+import { MessageType, MessageTypeId, NewProduct, Product, ProfileState } from "../Types/types";
 
 // const API_URL='https://api-crud.elcho.dev/api/v1/d7f73-daf9b-15876/products'
 const API_URL2 = "https://6765634852b2a7619f5f643f.mockapi.io/redux";
-
+const api = "https://680dcc8ec47cb8074d913800.mockapi.io/message";
+const api_frofile="https://680dcc8ec47cb8074d913800.mockapi.io/products"
 
 
 export const fetchProducts = createAsyncThunk<
@@ -47,7 +48,7 @@ export const deleteProduct = createAsyncThunk<string, string>(
 export const updateProduct = createAsyncThunk(
   "products/updateProduct",
   async (updateProductInfo: Product) => {
-    console.log(updateProductInfo);
+    // console.log(updateProductInfo);
 
     const res = await axios.put(`${API_URL2}/${updateProductInfo._id}`, {
       ...updateProductInfo,
@@ -71,7 +72,6 @@ export const updateProduct = createAsyncThunk(
 //            Message
 
 
-const api = "https://680dcc8ec47cb8074d913800.mockapi.io/message";
 
 
 export const fetchMessage = createAsyncThunk("message/getMessage", async () => {
@@ -89,5 +89,21 @@ export const createMessage=createAsyncThunk("message/createMessage",
 export const updateMessage=createAsyncThunk("message/updateMessage",
   async(value:MessageTypeId)=>{
     const res=await axios.put(`${api}/${value.id}`,{...value})
+    return res.data
+  })
+
+
+  //       PROFILE
+
+  export const fetchProfile=createAsyncThunk("profile/getProfile",async ()=>{
+    const res=await axios.get(`${api_frofile}`)
+    console.log(res.data);
+    
+    return res.data
+  })
+
+  export const updateProfileMock=createAsyncThunk('profile/updateProfile',
+    async (value:ProfileState)=>{
+    const res=await axios.put(`${api_frofile}/${value.id}`,{...value,id:value.id})
     return res.data
   })

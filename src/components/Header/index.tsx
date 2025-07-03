@@ -21,6 +21,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../../store/slice/authSlice";
 import { RootState } from "../../store/store";
 import { setSearch } from "../../store/slice/searchSlice";
+import { ProfileState } from "../../Types/types";
 // import Button from '@mui/material/Button';
 
 const pages = ["Все", "Ползователь", "AI", "Карзина", "Категория"];
@@ -36,9 +37,15 @@ function Header() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null)
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
   const [searchValue, setSearchValue] = React.useState('');
+  const [profile, setProfile] = React.useState<ProfileState[]>([]);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const user = useSelector((state: RootState) => state.auth.user);
+  const pro = useSelector((state: RootState) => state.profile.profile);
+
+
+console.log(profile);
+
 
   const handleOpenNavMenu = (event:React.MouseEvent<HTMLButtonElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -63,11 +70,19 @@ function Header() {
   function sendSearch(){
     dispatch(setSearch(searchValue))
   }
+  function getProfile(){
+   const res=pro.filter((el)=>el.email===user?el:'')
+ setProfile(res)
+
+}
 
   // const top10 = ["Apple", "Car", "Home"];
 React.useEffect(()=>{
-
+  
+getProfile()
 },[dispatch])
+
+
 function exit(){
   dispatch(setUser(null))
   return "/"
@@ -207,9 +222,12 @@ function exit(){
             <button onClick={()=>sendSearch()} className="border">Поиск</button>
           </div>
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
+            <Tooltip title="меню">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                {profile.map((el)=>(
+                <Avatar alt="Remy Sharp" src={el.url} />
+                ))}
+                {/* <Avatar alt="Remy Sharp" src={profile.map((el)=>el.url)} /> */}
               </IconButton>
             </Tooltip>
             <p>{user ? user : "Войти"}</p>

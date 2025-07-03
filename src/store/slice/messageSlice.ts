@@ -1,13 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit"
 import { createMessage, fetchMessage, updateMessage } from "../../api/api"
-import {  MessageTypeId } from "../../Types/types"
+import {  MessageState } from "../../Types/types"
 
-
-interface MessageState{
-    message:MessageTypeId[],
-    loading:boolean,
-    error:null|string
-}
 
 const initialState:MessageState=({
     message:[],

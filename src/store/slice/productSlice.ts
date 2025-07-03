@@ -1,12 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { createProduct, deleteProduct, fetchProducts, updateProduct } from "../../api/api";
-import { Product } from "../../Types/types";
+import { Product, ProductState } from "../../Types/types";
 
-interface ProductState {
-  products: Product[];
-  loading: boolean;
-  error: string | null;
-}
+
 
 
 const initialState: ProductState = {

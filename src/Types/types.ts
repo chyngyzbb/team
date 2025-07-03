@@ -11,7 +11,6 @@
     id:string
  }
 
-
  export interface SettingsType{
     visibility:boolean,
     copy:boolean,
@@ -30,4 +29,42 @@ export interface NewProduct {
   image: string;
   user: string;
   client: string[];
+}
+export interface AuthState{
+    user:null|string,
+    loading:boolean,
+    error:null|string
+}
+
+export interface MessageState{
+    message:MessageTypeId[],
+    loading:boolean,
+    error:null|string
+}
+
+export interface ProductState {
+  products: Product[];
+  loading: boolean;
+  error: string | null;
+}
+
+export interface SearchState{
+    search:string,
+    loading:boolean,
+    error:null|string
+}
+
+export interface ProfileState{
+    name:string,
+    lastname:string,
+    tel:string,
+    url:string,
+    email:string,
+    company:string,
+    id:string
+}
+export interface StateProfile{
+    profile:ProfileState[],
+    loading:boolean,
+    error:null|string
 }
