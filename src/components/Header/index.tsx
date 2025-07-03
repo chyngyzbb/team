@@ -224,10 +224,13 @@ function exit(){
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="меню">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                {profile.map((el)=>(
-                <Avatar alt="Remy Sharp" src={el.url} />
-                ))}
-                {/* <Avatar alt="Remy Sharp" src={profile.map((el)=>el.url)} /> */}
+                 <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+                {/* {profile.map((el)=>(
+                  <Avatar alt="Remy Sharp" src={`${el.url?'https://cdn-icons-png.flaticon.com/512/3541/3541871.png':el.url}`} />
+                 ))}  */}
+                  {/* {profile.map((el)=>(
+                  <Avatar alt="Travis Howard" src={`${el.url?el.url:'https://cdn-icons-png.flaticon.com/512/3541/3541871.png'}`} />
+                 ))}  */}
               </IconButton>
             </Tooltip>
             <p>{user ? user : "Войти"}</p>
